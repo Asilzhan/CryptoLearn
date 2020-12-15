@@ -1,0 +1,79 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+
+    <!--Menu-->
+    <v:String x:Key="file">Файл</v:String>
+    <v:String x:Key="Options">Настройка</v:String>
+    <v:String x:Key="help">Помощь</v:String>
+    <v:String x:Key="languageMenu">Язык</v:String>
+    <v:String x:Key="theme">ТЕмы</v:String>
+    <v:String x:Key="unitSystem">Система единиц</v:String>
+    <v:String x:Key="userGuide">Гид пользователя</v:String>
+
+    <!--TabItem Name-->
+    <v:String x:Key="formationFluid">Пластовая жидкость</v:String>
+    <v:String x:Key="wellReservoir">Скважина/Резервуар</v:String>
+    <v:String x:Key="zonesFormation">Зоны/Пласт</v:String>
+    <v:String x:Key="wellboreTubular">Ствол Скважины/Трубчатый</v:String>
+    <v:String x:Key="gunSystems">Оружейная система(ы)</v:String>
+    <v:String x:Key="output">Отчет</v:String>
+    <v:String x:Key="dataBase">База данных</v:String>
+
+    <!--FormationFluid-->
+    <v:String x:Key="primaryFluid">Первичная жидкость</v:String>
+    <v:String x:Key="oilDensity">Плотность масла</v:String>
+    <v:String x:Key="waterDensity">Плотность воды</v:String>
+    <v:String x:Key="waterSolinity">Соленость воды</v:String>
+    <v:String x:Key="gasGravity">Гравитация газа</v:String>
+    <v:String x:Key="waterCut">Обводненность</v:String>
+    <v:String x:Key="separatorGLR">Сепаратор GLR</v:String>
+    <v:String x:Key="totalGLR">Общий GLR</v:String>
+    <v:String x:Key="viscosity">Вязкость</v:String>
+    <v:String x:Key="fVF">FVF</v:String>
+    <v:String x:Key="bubblePoint">Точка пузыря</v:String>
+    <v:String x:Key="correlations">Корреляции</v:String>
+    <v:String x:Key="relativePerm">Relative Perm</v:String>
+
+    <!--Well/Reservior-->
+    <v:String x:Key="drainageDiameter">Диаметр Дренажа</v:String>
+    <v:String x:Key="followingBottomHolePressure">Давление в нижнем отверстии</v:String>
+
+    <!--Zones/Formation-->
+    <v:String x:Key="tvdTop">Tvd Сверху</v:String>
+    <v:String x:Key="tvdBottom">Tvd Нижний</v:String>
+    <v:String x:Key="rockType">Тип породы</v:String>
+    <v:String x:Key="rockStrength">Прочность Породы</v:String>
+    <v:String x:Key="porosity">Пористость</v:String>
+    <v:String x:Key="porePressure">Поровое давление</v:String>
+    <v:String x:Key="verticalStress">Верт. Напряжение</v:String>
+    <v:String x:Key="effectiveStress">Эффект. Напряжение</v:String>
+    <v:String x:Key="wellDamage">Повреждение Скважины</v:String>
+    <v:String x:Key="horizontalPerm">Гориз. Проницаемость</v:String>
+    <v:String x:Key="verticalPerm">Верт. Проницаемость</v:String>
+    <v:String x:Key="bulkDensity">Насыпная плотность</v:String>
+    <v:String x:Key="kdk">Kdk</v:String>
+    <v:String x:Key="remove">Удалить</v:String>
+    <v:String x:Key="add">Добавить</v:String>
+    <v:String x:Key="edit">Редактировать</v:String>
+
+    <!--Wellbore/Tubular-->
+    <v:String x:Key="casingID">Труба ID</v:String>
+    <v:String x:Key="wellboreDiameter">Диаметр Ствола Скважины</v:String>
+    <v:String x:Key="casingGrades">Марки Обсадных Труб</v:String>
+    <v:String x:Key="brinellHardness">Твердость по Бринеллю</v:String>
+    <v:String x:Key="casingCementThickness">Толщина обсадной колонны+цемента</v:String>
+
+
+    <!--Output-->
+    <v:String x:Key="company">Компания</v:String>
+    <v:String x:Key="well">Скважина</v:String>
+    <v:String x:Key="field">Поле</v:String>
+    <v:String x:Key="engineer">Инженер</v:String>
+    <v:String x:Key="country">Страна</v:String>
+    <v:String x:Key="date">Дата</v:String>
+    <v:String x:Key="language">Язык</v:String>
+    <v:String x:Key="directory">Директория</v:String>
+    <v:String x:Key="print">Печать</v:String>
+    <v:String x:Key="generalResource">Основная информация</v:String>
+</ResourceDictionary>

@@ -1,0 +1,61 @@
+﻿<Window x:Class="CryptoLearn.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodels="clr-namespace:CryptoLearn.ViewModels"
+        xmlns:views="clr-namespace:CryptoLearn.Views"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="SPAN" Height="736.981" Width="1106" Background="#FF2C2C2C" x:Name="mainWindow" ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="TabButtonBackgroundColor" Color="#FF404040" />
+            <SolidColorBrush x:Key="TabButtonBorderColor" Color="Black" />
+            <System:Double x:Key="TabButtonHeight">50</System:Double>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Window.DataContext>
+        <viewmodels:MainWindowViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Margin="10,2,10,2" Background="Transparent">
+            <MenuItem Header="{DynamicResource file}" Height="24" Foreground="White"
+                      HorizontalContentAlignment="Center">
+
+            </MenuItem>
+            <MenuItem Header="{DynamicResource Options}" Height="24" Foreground="White"
+                      HorizontalContentAlignment="Center">
+                <MenuItem Name="menuLanguage" Header="{DynamicResource languageMenu}" Foreground="Black" />
+                <MenuItem Header="Unit system" Foreground="Black"
+                          ItemsSource="{Binding UnitSystemsCollection}"
+
+                          DisplayMemberPath="Name" />
+
+            </MenuItem>
+            <MenuItem Header="{DynamicResource help}" Height="24" Foreground="White"
+                      HorizontalContentAlignment="Center">
+                <MenuItem Header="{DynamicResource userGuide}" Foreground="Black"></MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <!-- Formation Fliud -->
+        <TabControl Grid.Row="1" Margin="10,0,10,10" HorizontalContentAlignment="Left" TabStripPlacement="Left"
+                    Background="#00000000">
+            <TabItem Header="{DynamicResource formationFluid}" Foreground="#FFDADADA"
+                     Style="{StaticResource mainTabStyle}">
+                
+            </TabItem>
+            
+        </TabControl>
+    </Grid>
+</Window>

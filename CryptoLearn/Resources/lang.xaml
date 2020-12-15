@@ -1,0 +1,85 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib">
+
+    <!--Menu-->
+    <v:String x:Key="file">File</v:String>
+    <v:String x:Key="Options">Options</v:String>
+    <v:String x:Key="help">Help</v:String>
+    <v:String x:Key="languageMenu">Language</v:String>
+    <v:String x:Key="theme">Themes</v:String>
+    <v:String x:Key="unitSystem">Unit System</v:String>
+    <v:String x:Key="userGuide">User Guide</v:String>
+    
+    <!--TabItem Name-->
+    <v:String x:Key="formationFluid">FormationFluid</v:String>
+    <v:String x:Key="wellReservoir">Well/Reservoir</v:String>
+    <v:String x:Key="zonesFormation">Zones/Formation</v:String>
+    <v:String x:Key="wellboreTubular">Wellbore/Tubular</v:String>
+    <v:String x:Key="gunSystems">Gun System(s)</v:String>
+    <v:String x:Key="output">Output</v:String>
+    <v:String x:Key="dataBase">Data Base</v:String>
+    
+    <!--FormationFluid-->
+    <v:String x:Key="primaryFluid">Primary Fluid</v:String>
+    <v:String x:Key="oilDensity">Oil Density</v:String>
+    <v:String x:Key="waterDensity">Water Density</v:String>
+    <v:String x:Key="waterSolinity">Water Solinity</v:String>
+    <v:String x:Key="gasGravity">Gas Gravity</v:String>
+    <v:String x:Key="waterCut">Water Cut</v:String>
+    <v:String x:Key="separatorGLR">Separator GLR</v:String>
+    <v:String x:Key="totalGLR">Total GLR</v:String>
+    <v:String x:Key="viscosity">Viscosity</v:String>
+    <v:String x:Key="fVF">FVF</v:String>
+    <v:String x:Key="bubblePoint">Bubble Point</v:String>
+    <v:String x:Key="correlations">Correlations</v:String>
+    <v:String x:Key="relativePerm">Relative Perm</v:String>
+
+    <!--Well/Reservior-->
+    <v:String x:Key="drainageDiameter">Drainage Diameter</v:String>
+    <v:String x:Key="followingBottomHolePressure">Following Bottom Hole Pressure</v:String>
+    
+    <!--Zones/Formation-->
+    <v:String x:Key="tvdTop">Tvd Top</v:String>
+    <v:String x:Key="tvdBottom">Tvd Bottom</v:String>
+    <v:String x:Key="rockType">Rock Type</v:String>
+    <v:String x:Key="rockStrength">Rock Strength</v:String>
+    <v:String x:Key="porosity">Porosity</v:String>
+    <v:String x:Key="porePressure">Pore Pressure</v:String>
+    <v:String x:Key="verticalStress">Vertical Stress</v:String>
+    <v:String x:Key="effectiveStress">Effective Stress</v:String>
+    <v:String x:Key="wellDamage">Well Damage</v:String>
+    <v:String x:Key="horizontalPerm">Horiz. Perm.</v:String>
+    <v:String x:Key="verticalPerm">Vert. Perm.</v:String>
+    <v:String x:Key="bulkDensity">Bulk Density</v:String>
+    <v:String x:Key="kdk">Kdk</v:String>
+    <v:String x:Key="remove">Remove</v:String>
+    <v:String x:Key="add">Add</v:String>
+    <v:String x:Key="edit">Edit</v:String>
+
+    <!--Wellbore/Tubular-->
+    <v:String x:Key="casingID">Casing ID</v:String>
+    <v:String x:Key="wellboreDiameter">Wellbore Diameter</v:String>
+    <v:String x:Key="casingGrades">Casing Grades</v:String>
+    <v:String x:Key="brinellHardness">Brinell Hardness</v:String>
+    <v:String x:Key="casingCementThickness">Casing+Cement thickness</v:String>
+    
+    
+    <!--Output-->
+    <v:String x:Key="company">Company</v:String>
+    <v:String x:Key="well">Well</v:String>
+    <v:String x:Key="field">Field</v:String>
+    <v:String x:Key="engineer">Engineer</v:String>
+    <v:String x:Key="country">Country</v:String>
+    <v:String x:Key="date">Date</v:String>
+    <v:String x:Key="language">Language</v:String>
+    <v:String x:Key="directory">Directory</v:String>
+    <v:String x:Key="print">Print</v:String>
+    <v:String x:Key="generalResource">General Information</v:String>
+    
+    
+    <!-- Это нужно перевести -->
+    <!--Gun systems-->
+    <v:String x:Key="selectedGuns">Selected Guns</v:String> 
+    
+</ResourceDictionary>
