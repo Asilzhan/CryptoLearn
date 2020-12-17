@@ -1,6 +1,6 @@
 ﻿namespace CryptoLearn.Interfaces
 {
-	public interface IRsaViewModel
+	public interface IRsaModel
 	{
 		public ulong E { get; set; }
 		public ulong D { get; set; }
