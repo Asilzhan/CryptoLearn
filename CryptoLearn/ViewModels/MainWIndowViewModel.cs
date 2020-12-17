@@ -2,16 +2,19 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using CryptoLearn.Annotations;
+using CryptoLearn.Interfaces;
 
 namespace CryptoLearn.ViewModels
 {
     internal class MainWindowViewModel : INotifyPropertyChanged
     {
         public CeaserViewModel CeaserViewModel { get; set; }
+        public VigenereViewModel VigenereViewModel { get; set; }
 
         public MainWindowViewModel()
         {
             CeaserViewModel = new CeaserViewModel();
+            VigenereViewModel = new VigenereViewModel();
         }
 
         #region INotifyPropertyChanged

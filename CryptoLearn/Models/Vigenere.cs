@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -8,7 +9,7 @@ using CryptoLearn.Interfaces;
 
 namespace CryptoLearn.Models
 {
-	public class Vigenere :IVigenereModel, INotifyPropertyChanged
+	public class Vigenere : IVigenereModel, INotifyPropertyChanged
 	{
 		
 		#region Private members
@@ -28,10 +29,10 @@ namespace CryptoLearn.Models
 				if (value == _alphabet) return;
 				_alphabet = value;
 				OnPropertyChanged();
+				OnPropertyChanged(nameof(ShiftedAlphabet));
 			}
 		}
-
-
+		
 		public string Key
 		{
 			get => _key;
@@ -41,6 +42,21 @@ namespace CryptoLearn.Models
 				_key = value;
 				OnPropertyChanged();
 			}
+		}
+
+		public ObservableCollection<string> ShiftedAlphabet
+		{
+			get
+			{
+				ObservableCollection<string> res = new ObservableCollection<string>();
+				for (int i = 0; i < Alphabet.Length; i++)
+				{
+					res.Add(Alphabet.Substring(i) + Alphabet.Substring(0, i));
+				}
+
+				return res;
+			} 
+			set{}
 		}
 
 		#endregion

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xaml.Behaviors.Media;
+﻿using System.Collections.ObjectModel;
+using Microsoft.Xaml.Behaviors.Media;
 
 namespace CryptoLearn.Interfaces
 {
@@ -7,6 +8,7 @@ namespace CryptoLearn.Interfaces
 
 		public string Alphabet { get; set; }		
 		public string Key { get; set; }
+		public ObservableCollection<string> ShiftedAlphabet { get; set; }
 		
 		public string Encrypt(string plainText);
 		public string Decrypt(string plainText);

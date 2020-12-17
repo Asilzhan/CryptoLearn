@@ -8,13 +8,13 @@ using CryptoLearn.Models;
 
 namespace CryptoLearn.ViewModels
 {
-	internal class CeaserViewModel : INotifyPropertyChanged
+	internal class VigenereViewModel : INotifyPropertyChanged
 	{
 		private Alphabet _alphabetPresenter;
 		private EncryptionType _encryptionType;
 		private string _plainText;
 		private string _cipherText;
-		public ICeaserModel Ceaser { get; set; }
+		public IVigenereModel Vigenere { get; set; }
 
 		public EncryptionType EncryptionType
 		{
@@ -34,7 +34,7 @@ namespace CryptoLearn.ViewModels
 			{
 				if (value.Equals(_alphabetPresenter)) return;
 				_alphabetPresenter = value;
-				Ceaser.Alphabet = value.Value;
+				Vigenere.Alphabet = value.Value;
 				OnPropertyChanged();
 			}
 		}
@@ -64,19 +64,19 @@ namespace CryptoLearn.ViewModels
 			}
 		}
 
-		public CeaserViewModel()
+		public VigenereViewModel()
 		{
-			Ceaser = new Ceaser();
+			Vigenere = new Vigenere();
 			EncryptCommand = new RelayCommand(o =>
 			{
 				if(EncryptionType==EncryptionType.Encrypt)
-					PlainText = Ceaser.Encrypt(PlainText);
-				else CipherText = Ceaser.Decrypt(PlainText);
+					CipherText = Vigenere.Encrypt(PlainText);
+				else CipherText = Vigenere.Decrypt(PlainText);
 			});
 			SwapTextCommand = new RelayCommand(o =>
 			{
 				PlainText = CipherText;
-				CipherText="";
+				CipherText = "";
 			});
 		}
 
