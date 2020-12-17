@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="../Styles/Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <converters:EnumBooleanConverter x:Key="EnumBooleanConverter" />
+            <converters:SpacedCapitalConverter x:Key="SpacedCapitalConverter" />
         </ResourceDictionary>
     </Window.Resources>
 
@@ -50,7 +51,8 @@
 
         <TabControl Grid.Row="1" Margin="10,0,10,10" HorizontalContentAlignment="Left" TabStripPlacement="Left"
                     Background="#00000000">
-            <TabItem Header="Цезарь" Foreground="#FFDADADA" DataContext="{Binding CeaserViewModel}"
+            <TabItem Header="Цезарь" Foreground="#FFDADADA" 
+                     DataContext="{Binding CeaserViewModel}"
                      Style="{StaticResource mainTabStyle}">
                 <Grid Background="#11111111" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <TabControl TabStripPlacement="Bottom" Background="#11111111">
@@ -76,10 +78,13 @@
                                                     <ColumnDefinition />
                                                 </Grid.ColumnDefinitions>
                                                 <StackPanel Orientation="Vertical">
-                                                    <RadioButton Content="Шифрлау" GroupName="FluidTypeGroup"
+                                                    
+                                                    <RadioButton Content="Шифрлау" 
+                                                                 GroupName="EncryptType"
                                                                  IsChecked="{Binding Path=EncryptionType, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=Encrypt}"
                                                                  Margin="10,10,0,5" />
-                                                    <RadioButton Content="Дешифрлау" GroupName="FluidTypeGroup"
+                                                    <RadioButton Content="Дешифрлау" 
+                                                                 GroupName="EncryptType"
                                                                  IsChecked="{Binding Path=EncryptionType, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=Decrypt}"
                                                                  Margin="10,10,0,5" />
                                                 </StackPanel>
@@ -101,13 +106,17 @@
 
                                                 <Label Grid.Column="1" Margin="10,36,0,0" Content="Кілт" Height="26"
                                                        VerticalAlignment="Top" HorizontalAlignment="Left" />
-                                                <TextBox Grid.Column="2" Text="{Binding Key}" Margin="10,36,0,0"
+                                                <TextBox Grid.Column="2" Text="{Binding Ceaser.Key}" Margin="10,36,0,0"
                                                          Height="26" Width="100" VerticalAlignment="Top"
                                                          HorizontalAlignment="Left" />
                                             </Grid>
                                             <Grid Grid.Row="1">
-                                                <TextBlock Margin="10,10,0,0" Text="{Binding Ceaser.Alphabet, Converter={StaticResource SpacedCapitalConverter}}" Width="200"></TextBlock>
-                                                <TextBlock Margin="10,36,0,0" Text="{Binding Ceaser.ShiftedAlphabet, Converter={StaticResource SpacedCapitalConverter}}" Width="200"></TextBlock>
+                                                <TextBlock Margin="10,10,0,0" 
+                                                           HorizontalAlignment="Center"
+                                                           Text="{Binding Ceaser.Alphabet, Converter={StaticResource SpacedCapitalConverter}}"></TextBlock>
+                                                <TextBlock Margin="10,36,0,0" 
+                                                           HorizontalAlignment="Center"
+                                                           Text="{Binding Ceaser.ShiftedAlphabet, Converter={StaticResource SpacedCapitalConverter}}"></TextBlock>
                                             </Grid>
                                         </Grid>
                                     </GroupBox>
@@ -121,16 +130,26 @@
                                                 <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBox Grid.Column="0" Text="{Binding Ceaser.PlainText}"
-                                                     Margin="10,10,0,0" HorizontalAlignment="Stretch"
+                                            <TextBox Grid.Column="0" Text="{Binding PlainText}"
+                                                     Margin="6" HorizontalAlignment="Stretch"
                                                      VerticalAlignment="Stretch"
                                                      Style="{StaticResource placeHolder}" Tag="Input">
                                             </TextBox>
+                                            <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                <Button Margin="2,6" 
+                                                        HorizontalAlignment="Stretch" 
+                                                        Height="24"
+                                                        Command="{Binding SwapTextCommand}"
+                                                ></Button>
+                                                <Button Margin="2,6" 
+                                                        HorizontalAlignment="Stretch" Content="{Binding EncryptionType}" 
+                                                        Height="24"
+                                                        Command="{Binding EncryptCommand}"
+                                                        />
+                                            </StackPanel>
 
-                                            <!-- <Button Grid.Column="1" Margin="10,10,5,0"></Button> -->
-
-                                            <TextBox Grid.Column="2" Text="{Binding Ceaser.CipherText}"
-                                                     Margin="10,10,0,0" HorizontalAlignment="Stretch"
+                                            <TextBox Grid.Column="2" Text="{Binding CipherText}"
+                                                     Margin="6" HorizontalAlignment="Stretch"
                                                      VerticalAlignment="Stretch" IsReadOnly="True"
                                                      Style="{StaticResource placeHolder}" Tag="Output">
                                             </TextBox>

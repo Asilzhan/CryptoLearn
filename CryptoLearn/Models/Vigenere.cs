@@ -13,25 +13,12 @@ namespace CryptoLearn.Models
 		
 		#region Private members
 
-		private string _plainText;
 		private string _alphabet;
-		private string _cipherText;
 		private string _key;
 
 		#endregion
 
 		#region Properties
-
-		public string PlainText
-		{
-			get => _plainText;
-			set
-			{
-				if (value == _plainText) return;
-				_plainText = value;
-				OnPropertyChanged();
-			}
-		}
 
 		public string Alphabet
 		{
@@ -44,16 +31,6 @@ namespace CryptoLearn.Models
 			}
 		}
 
-		public string CipherText
-		{
-			get => _cipherText;
-			set
-			{
-				if (value == _cipherText) return;
-				_cipherText = value;
-				OnPropertyChanged();
-			}
-		}
 
 		public string Key
 		{
@@ -70,34 +47,34 @@ namespace CryptoLearn.Models
 
 		#region Methods
 
-		public void Encrypt()
+		public string Encrypt(string plainText)
 		{
-			string key = new string(Enumerable.Repeat(_key.ToCharArray(), PlainText.Length / Key.Length + 1).SelectMany(c => c).ToArray());
-			key = key.Substring(0, PlainText.Length);
-			StringBuilder builder = new StringBuilder(PlainText);
-			for (int i = 0; i < PlainText.Length; i++)
+			string key = new string(Enumerable.Repeat(_key.ToCharArray(), plainText.Length / Key.Length + 1).SelectMany(c => c).ToArray());
+			key = key.Substring(0, plainText.Length);
+			StringBuilder builder = new StringBuilder(plainText);
+			for (int i = 0; i < plainText.Length; i++)
 			{
-				int pos1 = Alphabet.IndexOf(char.ToLower(PlainText[i]));
+				int pos1 = Alphabet.IndexOf(char.ToLower(plainText[i]));
 				int pos2 = Alphabet.IndexOf(char.ToLower(key[i]));
 				int pos = (pos1 + pos2) % Alphabet.Length;
-				builder[i] = Alphabet[pos].Capitalize(PlainText[i]);
+				builder[i] = Alphabet[pos].Capitalize(plainText[i]);
 			}
-			CipherText = builder.ToString();
+			return builder.ToString();
 		}
 
-		public void Decrypt()
+		public string Decrypt(string plainText)
 		{
-			string key = new string(Enumerable.Repeat(_key.ToCharArray(), PlainText.Length / Key.Length + 1).SelectMany(c => c).ToArray());
-			key = key.Substring(0, PlainText.Length);
-			StringBuilder builder = new StringBuilder(PlainText);
-			for (int i = 0; i < PlainText.Length; i++)
+			string key = new string(Enumerable.Repeat(_key.ToCharArray(), plainText.Length / Key.Length + 1).SelectMany(c => c).ToArray());
+			key = key.Substring(0, plainText.Length);
+			StringBuilder builder = new StringBuilder(plainText);
+			for (int i = 0; i < plainText.Length; i++)
 			{
-				int pos1 = Alphabet.IndexOf(char.ToLower(PlainText[i]));
+				int pos1 = Alphabet.IndexOf(char.ToLower(plainText[i]));
 				int localKey = Alphabet.IndexOf(char.ToLower(key[i]));
 				int pos = (pos1 - localKey + Alphabet.Length) % Alphabet.Length;
-				builder[i] = Alphabet[pos].Capitalize(PlainText[i]);
+				builder[i] = Alphabet[pos].Capitalize(plainText[i]);
 			}
-			CipherText = builder.ToString();
+			return builder.ToString();
 		}
 
 		#endregion

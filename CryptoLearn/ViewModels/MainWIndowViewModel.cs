@@ -9,6 +9,11 @@ namespace CryptoLearn.ViewModels
     {
         public CeaserViewModel CeaserViewModel { get; set; }
 
+        public MainWindowViewModel()
+        {
+            CeaserViewModel = new CeaserViewModel();
+        }
+
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
 
