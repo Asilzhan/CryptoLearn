@@ -31,7 +31,7 @@ namespace CryptoLearn
             m_Languages.Add(new CultureInfo("en-US")); //Нейтральная культура для этого проекта
             m_Languages.Add(new CultureInfo("ru-RU"));
             m_Languages.Add(new CultureInfo("kk-KZ"));
-            Language = Settings.Default.DefaultLanguage;
+            // Language = Settings.Default.DefaultLanguage;
         }
 
         //Евент для оповещения всех окон приложения
