@@ -1,14 +1,21 @@
-﻿namespace CryptoLearn.Interfaces
+﻿using System.Numerics;
+
+namespace CryptoLearn.Interfaces
 {
 	public interface IRsaModel
 	{
-		public ulong E { get; set; }
-		public ulong D { get; set; }
-		public ulong P { get; set; }
-		public ulong Q { get; set; }
+		public BigInteger P { get; set; }
+		public BigInteger Q { get; set; }
+		public BigInteger E { get; set; }
+		public BigInteger D { get; set; }
+		public BigInteger Totient { get; set; }
+		public BigInteger N { get; set; }
+		public string Alphabet { get; set; }
 		public string PlainText { get; set; }
 		public string CipherText { get; set; }
-		public string EncryptData(string text, ulong key1, ulong key2);
-		public string DecryptData(string text, ulong key1, ulong key2);
+		public void Encrypt();
+		public void Decrypt();
+		public void GeneratePrimes();
+		public void CalculateDAndE();
 	}
 }

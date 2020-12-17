@@ -41,6 +41,7 @@ namespace CryptoLearn.Models
 				if (value == _alphabet) return;
 				_alphabet = value.ToLower();
 				OnPropertyChanged();
+				OnPropertyChanged(nameof(ShiftedAlphabet));
 			}
 		}
 
@@ -66,6 +67,7 @@ namespace CryptoLearn.Models
 			}
 		}
 
+		public string ShiftedAlphabet => Alphabet.Substring(Key) + Alphabet.Substring(0, _key);
 		#endregion
 
 		#region Methods
