@@ -13,9 +13,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Styles/Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <SolidColorBrush x:Key="TabButtonBackgroundColor" Color="#FF404040" />
-            <SolidColorBrush x:Key="TabButtonBorderColor" Color="Black" />
-            <System:Double x:Key="TabButtonHeight">50</System:Double>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -47,15 +44,53 @@
                 <MenuItem Header="{DynamicResource userGuide}" Foreground="Black"></MenuItem>
             </MenuItem>
         </Menu>
-
-        <!-- Formation Fliud -->
+        
         <TabControl Grid.Row="1" Margin="10,0,10,10" HorizontalContentAlignment="Left" TabStripPlacement="Left"
                     Background="#00000000">
-            <TabItem Header="{DynamicResource formationFluid}" Foreground="#FFDADADA"
+            <TabItem Header="Цезарь" Foreground="#FFDADADA"
+                     Style="{StaticResource mainTabStyle}">
+                <Grid Background="#11111111" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <TabControl TabStripPlacement="Bottom" Background="#11111111">
+                        <TabItem Header="Example" Style="{StaticResource secondaryTabStyle}">
+                            <Grid Background="White">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <GroupBox Header="Инициализациялау">
+                                    
+                                </GroupBox>
+                                <GroupBox Grid.Row="1" Header="Шифрлау">
+                                    
+                                </GroupBox>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Description" Style="{StaticResource secondaryTabStyle}">
+                            
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Вижинер" Foreground="#FFDADADA"
                      Style="{StaticResource mainTabStyle}">
                 
             </TabItem>
-            
+            <TabItem Header="DES" Foreground="#FFDADADA"
+                     Style="{StaticResource mainTabStyle}">
+                
+            </TabItem>
+            <TabItem Header="AES" Foreground="#FFDADADA"
+                     Style="{StaticResource mainTabStyle}">
+                
+            </TabItem>
+            <TabItem Header="ГОСТ" Foreground="#FFDADADA"
+                     Style="{StaticResource mainTabStyle}">
+                
+            </TabItem>
+            <TabItem Header="RSA" Foreground="#FFDADADA"
+                     Style="{StaticResource mainTabStyle}">
+                
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>
