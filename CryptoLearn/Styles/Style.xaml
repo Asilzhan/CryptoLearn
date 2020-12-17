@@ -135,7 +135,10 @@
                                                 UpdateSourceTrigger=PropertyChanged}"
                                  x:Name="textSource" 
                                  Background="Transparent" 
-                                 Panel.ZIndex="2" />
+                                 Panel.ZIndex="2" 
+                                  TextWrapping="Wrap"
+                                 AcceptsReturn="True"
+                                 VerticalScrollBarVisibility="Visible"/>
                         <TextBox Text="{TemplateBinding Tag}" Background="{TemplateBinding Background}" Panel.ZIndex="1">
                             <TextBox.Style>
                                 <Style TargetType="{x:Type TextBox}">

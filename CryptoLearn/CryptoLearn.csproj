@@ -26,7 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Converters" />
+    <Compile Include="..\..\..\Documents\GitHub\SpanCore\SpanCore\Converters\EnumBooleanConverter.cs">
+      <Link>Converters\EnumBooleanConverter.cs</Link>
+    </Compile>
   </ItemGroup>
 
 </Project>
