@@ -7,7 +7,8 @@
         xmlns:views="clr-namespace:CryptoLearn.Views"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="SPAN" Height="736.981" Width="1106" Background="#FF2C2C2C" x:Name="mainWindow" ResizeMode="NoResize">
+        Title="SPAN" Height="736.981" Width="1106" Background="#FF2C2C2C" x:Name="mainWindow" ResizeMode="NoResize"
+        >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -47,7 +48,7 @@
         
         <TabControl Grid.Row="1" Margin="10,0,10,10" HorizontalContentAlignment="Left" TabStripPlacement="Left"
                     Background="#00000000">
-            <TabItem Header="Цезарь" Foreground="#FFDADADA"
+            <TabItem Header="Цезарь" Foreground="#FFDADADA" DataContext="{Binding CeaserViewModel}"
                      Style="{StaticResource mainTabStyle}">
                 <Grid Background="#11111111" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <TabControl TabStripPlacement="Bottom" Background="#11111111">
@@ -58,7 +59,7 @@
                                     <RowDefinition />
                                 </Grid.RowDefinitions>
                                 <GroupBox Header="Инициализациялау">
-                                    
+                                    <TextBox Text="{Binding Key}"></TextBox>
                                 </GroupBox>
                                 <GroupBox Grid.Row="1" Header="Шифрлау">
                                     
