@@ -6,14 +6,16 @@
         xmlns:viewmodels="clr-namespace:CryptoLearn.ViewModels"
         xmlns:views="clr-namespace:CryptoLearn.Views"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:converters="clr-namespace:CryptoLearn.Converters"
+        xmlns:models="clr-namespace:CryptoLearn.Models"
         mc:Ignorable="d"
-        Title="SPAN" Height="736.981" Width="1106" Background="#FF2C2C2C" x:Name="mainWindow" ResizeMode="NoResize"
-        >
+        Title="SPAN" Height="600" Width="900" Background="#FF2C2C2C" x:Name="mainWindow" ResizeMode="NoResize">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Styles/Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <converters:EnumBooleanConverter x:Key="EnumBooleanConverter" />
         </ResourceDictionary>
     </Window.Resources>
 
@@ -45,7 +47,7 @@
                 <MenuItem Header="{DynamicResource userGuide}" Foreground="Black"></MenuItem>
             </MenuItem>
         </Menu>
-        
+
         <TabControl Grid.Row="1" Margin="10,0,10,10" HorizontalContentAlignment="Left" TabStripPlacement="Left"
                     Background="#00000000">
             <TabItem Header="Цезарь" Foreground="#FFDADADA" DataContext="{Binding CeaserViewModel}"
@@ -55,42 +57,114 @@
                         <TabItem Header="Example" Style="{StaticResource secondaryTabStyle}">
                             <Grid Background="White">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition />
-                                    <RowDefinition />
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="2*" />
                                 </Grid.RowDefinitions>
-                                <GroupBox Header="Инициализациялау">
-                                    <TextBox Text="{Binding Key}"></TextBox>
-                                </GroupBox>
-                                <GroupBox Grid.Row="1" Header="Шифрлау">
-                                    
-                                </GroupBox>
+                                <Grid Grid.Row="0" Background="White">
+                                    <GroupBox Header="Инициализациялау" Margin="10,10,10,0">
+                                        <Grid Background="#11111111" HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Stretch">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Grid Grid.Row="0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="120" />
+                                                    <ColumnDefinition Width="80" />
+                                                    <ColumnDefinition Width="120" />
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Orientation="Vertical">
+                                                    <RadioButton Content="Шифрлау" GroupName="FluidTypeGroup"
+                                                                 IsChecked="{Binding Path=EncryptionType, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=Encrypt}"
+                                                                 Margin="10,10,0,5" />
+                                                    <RadioButton Content="Дешифрлау" GroupName="FluidTypeGroup"
+                                                                 IsChecked="{Binding Path=EncryptionType, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=Decrypt}"
+                                                                 Margin="10,10,0,5" />
+                                                </StackPanel>
+
+                                                <Label Grid.Column="1" Margin="10,5,0,0" Content="Алфавит" Height="26"
+                                                       VerticalAlignment="Top" HorizontalAlignment="Left" />
+                                                <ComboBox Grid.Column="2" Margin="10,5,0,0" Width="100" Height="24"
+                                                          VerticalAlignment="Top" HorizontalAlignment="Left"
+                                                          SelectedItem="{Binding AlphabetPresenter}"
+                                                          SelectedIndex="0"
+                                                          DisplayMemberPath="Name">
+                                                    <models:Alphabet Name="Қазақ"
+                                                                     Value="аәбвгғдеёжзийкқлмнңоөпрстуұүфхһцчшщъыіьэюя">
+                                                    </models:Alphabet>
+                                                    <models:Alphabet Name="Русский"
+                                                                     Value="абвгдеёжзийклмнопрстуфхцчшщъыьэюя" />
+                                                    <models:Alphabet Name="English" Value="abcdefghijklmnopqrstuvwxyz" />
+                                                </ComboBox>
+
+                                                <Label Grid.Column="1" Margin="10,36,0,0" Content="Кілт" Height="26"
+                                                       VerticalAlignment="Top" HorizontalAlignment="Left" />
+                                                <TextBox Grid.Column="2" Text="{Binding Key}" Margin="10,36,0,0"
+                                                         Height="26" Width="100" VerticalAlignment="Top"
+                                                         HorizontalAlignment="Left" />
+                                            </Grid>
+                                            <Grid Grid.Row="1">
+                                                <TextBlock Margin="10,10,0,0" Text="{Binding Ceaser.Alphabet, Converter={StaticResource SpacedCapitalConverter}}" Width="200"></TextBlock>
+                                                <TextBlock Margin="10,36,0,0" Text="{Binding Ceaser.ShiftedAlphabet, Converter={StaticResource SpacedCapitalConverter}}" Width="200"></TextBlock>
+                                            </Grid>
+                                        </Grid>
+                                    </GroupBox>
+                                </Grid>
+                                <Grid Grid.Row="1" Background="White">
+                                    <GroupBox Header="Шифрлау" Margin="10">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="50" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBox Grid.Column="0" Text="{Binding Ceaser.PlainText}"
+                                                     Margin="10,10,0,0" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Stretch"
+                                                     Style="{StaticResource placeHolder}" Tag="Input">
+                                            </TextBox>
+
+                                            <!-- <Button Grid.Column="1" Margin="10,10,5,0"></Button> -->
+
+                                            <TextBox Grid.Column="2" Text="{Binding Ceaser.CipherText}"
+                                                     Margin="10,10,0,0" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Stretch" IsReadOnly="True"
+                                                     Style="{StaticResource placeHolder}" Tag="Output">
+                                            </TextBox>
+                                        </Grid>
+                                    </GroupBox>
+                                </Grid>
+
                             </Grid>
                         </TabItem>
                         <TabItem Header="Description" Style="{StaticResource secondaryTabStyle}">
-                            
+
                         </TabItem>
                     </TabControl>
                 </Grid>
             </TabItem>
             <TabItem Header="Вижинер" Foreground="#FFDADADA"
                      Style="{StaticResource mainTabStyle}">
-                
+
             </TabItem>
             <TabItem Header="DES" Foreground="#FFDADADA"
                      Style="{StaticResource mainTabStyle}">
-                
+
             </TabItem>
             <TabItem Header="AES" Foreground="#FFDADADA"
                      Style="{StaticResource mainTabStyle}">
-                
+
             </TabItem>
             <TabItem Header="ГОСТ" Foreground="#FFDADADA"
                      Style="{StaticResource mainTabStyle}">
-                
+
             </TabItem>
             <TabItem Header="RSA" Foreground="#FFDADADA"
                      Style="{StaticResource mainTabStyle}">
-                
+
             </TabItem>
         </TabControl>
     </Grid>
