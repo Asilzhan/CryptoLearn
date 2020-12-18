@@ -5,22 +5,24 @@ using CryptoLearn.Annotations;
 using CryptoLearn.Helper;
 using CryptoLearn.Interfaces;
 using CryptoLearn.Models;
+using System.Numerics;
+
 
 namespace CryptoLearn.ViewModels
 {
-    internal class CeaserViewModel : INotifyPropertyChanged
+    internal class RsaViewModel : INotifyPropertyChanged
     {
         #region Private members
-
-        private Alphabet _alphabetPresenter;
+        
         private EncryptionType _encryptionType;
         private string _plainText;
         private string _cipherText;
+        private Alphabet _alphabetPresenter;
 
         #endregion
 
         #region Properties
-
+        
         public EncryptionType EncryptionType
         {
             get => _encryptionType;
@@ -28,18 +30,6 @@ namespace CryptoLearn.ViewModels
             {
                 if (value == _encryptionType) return;
                 _encryptionType = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public Alphabet AlphabetPresenter
-        {
-            get => _alphabetPresenter;
-            set
-            {
-                if (value.Equals(_alphabetPresenter)) return;
-                _alphabetPresenter = value;
-                Ceaser.Alphabet = value.Value;
                 OnPropertyChanged();
             }
         }
@@ -66,28 +56,27 @@ namespace CryptoLearn.ViewModels
             }
         }
 
-        public ICeaserModel Ceaser { get; set; }
-        public ICommand EncryptCommand { get; set; }
-        public ICommand SwapTextCommand { get; set; }
+        public Alphabet AlphabetPresenter
+        {
+            get => _alphabetPresenter;
+            set
+            {
+                if (value.Equals(_alphabetPresenter)) return;
+                _alphabetPresenter = value;
+                Rsa.Alphabet = value.Value;
+                OnPropertyChanged();
+            }
+        }
+        
+        public IRsaModel Rsa { get; set; }
 
         #endregion
 
         #region Constructor
 
-        public CeaserViewModel()
+        public RsaViewModel()
         {
-            Ceaser = new Ceaser();
-            EncryptCommand = new RelayCommand(o =>
-            {
-                if (EncryptionType == EncryptionType.Encrypt)
-                    PlainText = Ceaser.Encrypt(PlainText);
-                else CipherText = Ceaser.Decrypt(PlainText);
-            });
-            SwapTextCommand = new RelayCommand(o =>
-            {
-                PlainText = CipherText;
-                CipherText = "";
-            });
+            Rsa = new Rsa();
         }
 
         #endregion
