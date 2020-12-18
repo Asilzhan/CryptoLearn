@@ -19,10 +19,21 @@
 
   <ItemGroup>
     <ApplicationDefinition Remove="App.xaml" />
+    <None Remove="Views\leftArrow.png" />
+    <None Remove="Views\UpArrow.png" />
     <ApplicationDefinition Include="Views\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Images" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\leftArrow.png" />
+    <Resource Include="Views\UpArrow.png" />
   </ItemGroup>
 
   <ItemGroup>

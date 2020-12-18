@@ -8,84 +8,103 @@ using CryptoLearn.Models;
 
 namespace CryptoLearn.ViewModels
 {
-	internal class VigenereViewModel : INotifyPropertyChanged
-	{
-		private Alphabet _alphabetPresenter;
-		private EncryptionType _encryptionType;
-		private string _plainText;
-		private string _cipherText;
-		public IVigenereModel Vigenere { get; set; }
+    internal class VigenereViewModel : INotifyPropertyChanged
+    {
+        #region Private members
 
-		public EncryptionType EncryptionType
-		{
-			get => _encryptionType;
-			set
-			{
-				if (value == _encryptionType) return;
-				_encryptionType = value;
-				OnPropertyChanged();
-			}
-		}
+        private Alphabet _alphabetPresenter;
+        private EncryptionType _encryptionType;
+        private string _plainText;
+        private string _cipherText;
 
-		public Alphabet AlphabetPresenter
-		{
-			get => _alphabetPresenter;
-			set
-			{
-				if (value.Equals(_alphabetPresenter)) return;
-				_alphabetPresenter = value;
-				Vigenere.Alphabet = value.Value;
-				OnPropertyChanged();
-			}
-		}
+        #endregion
 
-		public ICommand EncryptCommand { get; set; }
-		public ICommand SwapTextCommand { get; set; }
+        #region Properties
 
-		public string PlainText
-		{
-			get => _plainText;
-			set
-			{
-				if (value == _plainText) return;
-				_plainText = value;
-				OnPropertyChanged();
-			}
-		}
+        public EncryptionType EncryptionType
+        {
+            get => _encryptionType;
+            set
+            {
+                if (value == _encryptionType) return;
+                _encryptionType = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public string CipherText
-		{
-			get => _cipherText;
-			set
-			{
-				if (value == _cipherText) return;
-				_cipherText = value;
-				OnPropertyChanged();
-			}
-		}
+        public Alphabet AlphabetPresenter
+        {
+            get => _alphabetPresenter;
+            set
+            {
+                if (value.Equals(_alphabetPresenter)) return;
+                _alphabetPresenter = value;
+                Vigenere.Alphabet = value.Value;
+                OnPropertyChanged();
+            }
+        }
 
-		public VigenereViewModel()
-		{
-			Vigenere = new Vigenere();
-			EncryptCommand = new RelayCommand(o =>
-			{
-				if(EncryptionType==EncryptionType.Encrypt)
-					CipherText = Vigenere.Encrypt(PlainText);
-				else CipherText = Vigenere.Decrypt(PlainText);
-			});
-			SwapTextCommand = new RelayCommand(o =>
-			{
-				PlainText = CipherText;
-				CipherText = "";
-			});
-		}
+        public string PlainText
+        {
+            get => _plainText;
+            set
+            {
+                if (value == _plainText) return;
+                _plainText = value;
+                OnPropertyChanged();
+            }
+        }
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public string CipherText
+        {
+            get => _cipherText;
+            set
+            {
+                if (value == _cipherText) return;
+                _cipherText = value;
+                OnPropertyChanged();
+            }
+        }
 
-		[NotifyPropertyChangedInvocator]
-		protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
-	}
+        public IVigenereModel Vigenere { get; set; }
+        public ICommand EncryptCommand { get; set; }
+        public ICommand SwapTextCommand { get; set; }
+
+        public bool IsValid { get; set; }
+        #endregion
+
+        #region Constuctor
+
+        public VigenereViewModel()
+        {
+            Vigenere = new Vigenere();
+            EncryptCommand = new RelayCommand(o =>
+            {
+                if (EncryptionType == EncryptionType.Encrypt)
+                    CipherText = Vigenere.Encrypt(PlainText);
+                else CipherText = Vigenere.Decrypt(PlainText);
+            });
+            SwapTextCommand = new RelayCommand(o =>
+            {
+                PlainText = CipherText;
+                CipherText = "";
+            });
+
+            IsValid = false;
+        }
+
+        #endregion
+        
+        #region INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        #endregion
+    }
 }

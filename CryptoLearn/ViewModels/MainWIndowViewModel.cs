@@ -11,10 +11,13 @@ namespace CryptoLearn.ViewModels
         public CeaserViewModel CeaserViewModel { get; set; }
         public VigenereViewModel VigenereViewModel { get; set; }
 
+        public RsaViewModel RsaViewModel { get; set; }
+        
         public MainWindowViewModel()
         {
             CeaserViewModel = new CeaserViewModel();
             VigenereViewModel = new VigenereViewModel();
+            RsaViewModel = new RsaViewModel();
         }
 
         #region INotifyPropertyChanged
