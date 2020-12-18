@@ -8,13 +8,15 @@ namespace CryptoLearn.Interfaces
 		public BigInteger Q { get; set; }
 		public BigInteger E { get; set; }
 		public BigInteger D { get; set; }
-		public BigInteger Totient { get; set; }
-		public BigInteger N { get; set; }
+		public BigInteger Totient { get; }
+		public BigInteger N { get; }
 		public string Alphabet { get; set; }
 		public string PlainText { get; set; }
 		public string CipherText { get; set; }
-		public void Encrypt();
-		public void Decrypt();
+		public byte[] Encrypt(byte[] arr);
+		public byte[] Decrypt(byte[] arr);
+		public byte[] StringToByteArray(string s);
+		public string ByteArrayToString(byte[] b);
 		public void GeneratePrimes();
 		public void CalculateDAndE();
 	}

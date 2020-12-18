@@ -1,25 +1,32 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using CryptoLearn.Annotations;
 using CryptoLearn.Helper;
 using CryptoLearn.Interfaces;
+using PrimeHelper.Primality;
+using PrimeHelper.Primality.Deterministic;
+using PrimeHelper.Primality.Heuristic;
+using PrimeHelper.Randomness;
 using Timer = System.Timers.Timer;
 
 namespace CryptoLearn.Models
 {
 	public class Rsa : IRsaModel, INotifyPropertyChanged
 	{
+		#region Private members
+
 		private BigInteger _e;
 		private BigInteger _d;
 		private BigInteger _p;
 		private BigInteger _q;
 		private string _plainText;
 		private string _cipherText;
-		private BigInteger _totient;
-		private BigInteger _n;
+
+		#endregion
 
 		#region Properties
 
@@ -44,7 +51,7 @@ namespace CryptoLearn.Models
 				OnPropertyChanged();
 			}
 		}
-		
+
 		public BigInteger P
 		{
 			get => _p;
@@ -52,7 +59,8 @@ namespace CryptoLearn.Models
 			{
 				if (value == _p) return;
 				_p = value;
-				Update();
+				OnPropertyChanged(nameof(Totient));
+				OnPropertyChanged(nameof(N));
 				OnPropertyChanged();
 			}
 		}
@@ -63,7 +71,8 @@ namespace CryptoLearn.Models
 			{
 				if (value == _q) return;
 				_q = value;
-				Update();
+				OnPropertyChanged(nameof(Totient));
+				OnPropertyChanged(nameof(N));
 				OnPropertyChanged();
 			}
 		}
@@ -74,7 +83,6 @@ namespace CryptoLearn.Models
 			{
 				if (value == _e) return;
 				_e = value;
-				Update();
 				OnPropertyChanged();
 			}
 		}
@@ -88,77 +96,72 @@ namespace CryptoLearn.Models
 				OnPropertyChanged();
 			}
 		}
-		public BigInteger Totient
-		{
-			get => _totient;
-			set
-			{
-				if (value == _totient) return;
-				_totient = value;
-				OnPropertyChanged();
-			}
-		}
-		public BigInteger N
-		{
-			get => _n;
-			set
-			{
-				if (value == _n) return;
-				_n = value;
-				OnPropertyChanged();
-			}
-		}
+		public BigInteger Totient => (P - 1) * (Q - 1);
+
+		public BigInteger N => P * Q;
 
 		#endregion
 
 		#region Methods
 
-		public void Encrypt()
+		public byte[] Encrypt(byte[] arr)
 		{
 			throw new NotImplementedException();
 		}
 
-		public void Decrypt()
+		public byte[] Decrypt(byte[] arr)
 		{
 			throw new NotImplementedException();
 		}
 
+		public byte[] StringToByteArray(string s)
+		{
+			throw new NotImplementedException();
+		}
+
+		public string ByteArrayToString(byte[] b)
+		{
+			throw new NotImplementedException();
+		}
 		public void GeneratePrimes()
 		{
-			BigInteger p = GeneratePrime();
-			BigInteger q = GeneratePrime();
+			P = GeneratePrime();
+			Q = GeneratePrime();
 			
+			#region Tests
 
+			Debug.Assert(P != Q);
+			
+			IPrimalityTest test1 = new RobinMillerTest(10);
+			Debug.Assert(test1.TestAsync(P).Result);
+			Debug.Assert(test1.TestAsync(Q).Result);
+
+			#endregion
+			
 		}
 
 		public BigInteger GeneratePrime()
 		{
-			Random random = new Random(Environment.TickCount);
-			byte[] t = new byte[8];
-			BigInteger prime;
-			do
-			{
-				random.NextBytes(t);
-				prime = new BigInteger(t);
-			} while (IsPrime(prime));
-			return prime;
+			return PrimeHelper.Tools.PrimaryBigInteger
+				.GenerateProbablyPrime(32).Result;
 		}
-		private bool IsPrime(BigInteger bigInteger)
-		{
-			throw new NotImplementedException();
-		}
-
-
 		public void CalculateDAndE()
 		{
-			throw new NotImplementedException();
+			BigInteger x = 0, y = 0, e = Totient - 2;
+			while (BigInteger.GreatestCommonDivisor(e, Totient)!=1)
+			{
+				e--;
+			}
+
+			PrimeHelper.Helpers.BigIntegerHelpers.GcdEx(e, Totient, ref x, ref y);
+			x = (x % Totient + Totient) % Totient;
+
+			E = e;
+			D = x;
+
+			Debug.Assert(E * D + y * Totient == 1);
 		}
-		private void Update()
-		{
-			N = P * Q;
-			Totient = (P - 1) * (Q - 1);
-		}
-		
+
 		#endregion
 
 		#region INotifyPropertyChanged
