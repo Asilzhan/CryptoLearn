@@ -25,4 +25,8 @@
     </ApplicationDefinition>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PrimeHelper\PrimeHelper.csproj" />
+  </ItemGroup>
+
 </Project>
