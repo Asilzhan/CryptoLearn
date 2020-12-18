@@ -27,7 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Views\Caesar.png" />
     <Resource Include="Views\leftArrow.png" />
+    <Resource Include="Views\UpArrow.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +38,7 @@
 
   <ItemGroup>
     <Compile Remove="Images\**" />
+    <Compile Remove="Validations\StringKeyValidation.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +47,12 @@
 
   <ItemGroup>
     <None Remove="Images\**" />
+    <None Remove="Views\Caesar3.svg.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Views\Caesar.png" />
+    <None Remove="Views\UpArrow.png" />
   </ItemGroup>
 
 </Project>
