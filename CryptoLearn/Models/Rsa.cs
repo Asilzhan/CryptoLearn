@@ -28,6 +28,12 @@ namespace CryptoLearn.Models
 
 		#endregion
 
+		public Rsa()
+		{
+			P = 13;
+			Q = 97;
+		}
+		
 		#region Properties
 
 		public string Alphabet { get; set; }
@@ -59,9 +65,9 @@ namespace CryptoLearn.Models
 			{
 				if (value == _p) return;
 				_p = value;
+				OnPropertyChanged();
 				OnPropertyChanged(nameof(Totient));
 				OnPropertyChanged(nameof(N));
-				OnPropertyChanged();
 			}
 		}
 		public BigInteger Q
@@ -71,9 +77,9 @@ namespace CryptoLearn.Models
 			{
 				if (value == _q) return;
 				_q = value;
+				OnPropertyChanged();
 				OnPropertyChanged(nameof(Totient));
 				OnPropertyChanged(nameof(N));
-				OnPropertyChanged();
 			}
 		}
 		public BigInteger E

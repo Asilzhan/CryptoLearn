@@ -7,7 +7,9 @@
         xmlns:views="clr-namespace:CryptoLearn.Views"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:converters="clr-namespace:CryptoLearn.Converters"
+        xmlns:validations="clr-namespace:CryptoLearn.Validations"
         xmlns:models="clr-namespace:CryptoLearn.Models"
+        xmlns:objectModel="clr-namespace:System.Collections.ObjectModel;assembly=System.Runtime"
         mc:Ignorable="d"
         Title="SPAN" Height="700" Width="1000" Background="#FF2C2C2C" x:Name="mainWindow" ResizeMode="NoResize">
     <Window.Resources>
@@ -17,6 +19,15 @@
             </ResourceDictionary.MergedDictionaries>
             <converters:EnumBooleanConverter x:Key="EnumBooleanConverter" />
             <converters:SpacedCapitalConverter x:Key="SpacedCapitalConverter" />
+            <converters:BigIntegerToStringConverter x:Key="BigIntegerToStringConverter"/>
+            <ControlTemplate x:Key="ValidationTemplate">
+                <StackPanel Orientation="Horizontal">
+                    <Border BorderBrush="Red" BorderThickness="1">
+                        <AdornedElementPlaceholder />
+                    </Border>
+                    <TextBlock Foreground="Red" FontSize="16" FontWeight="Bold">!</TextBlock>
+                </StackPanel>
+            </ControlTemplate>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -265,7 +276,7 @@
                                                     Height="24"
                                                     Width="120"
                                                     Command="{Binding SwapTextCommand}">
-                                                <Image Source="/Views/UpArrow.png" />
+                                                <Image Source="../Resources/leftArrow.png" />
                                             </Button>
 
                                             <TextBox Grid.Row="2" Text="{Binding CipherText}"
@@ -363,7 +374,7 @@
                                                 </StackPanel>
                                                 
                                             </GroupBox>
-                                            <GroupBox Grid.Column="1" Header="Жәй сандар" Margin="6" Foreground="Black"
+                                            <GroupBox Grid.Column="1" Header="Жай сандар" Margin="6" Foreground="Black"
                                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                                 <StackPanel Orientation="Vertical">
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -385,34 +396,53 @@
                                                     </StackPanel>
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
                                                                 HorizontalAlignment="Stretch">
-                                                        <Label Content="Жәй сан p" Margin="10,4,0,0" Height="26"
+                                                        <Label Content="P жай саны" Margin="10,4,0,0" Height="26"
                                                                Width="70"
                                                                VerticalAlignment="Top" HorizontalAlignment="Left" />
-                                                        <TextBox Text="{Binding Rsa.P}"
+                                                        <TextBox
                                                                  Margin="6" HorizontalAlignment="Stretch"
                                                                  VerticalAlignment="Top"
-                                                                 Style="{StaticResource OnlyPlaceHolder}" Tag="13"
-                                                                 Height="24" Width="184">
+                                                                 Height="24" Width="184"
+                                                                 Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                                                                 Style="{StaticResource PrimeTextBox}"
+                                                                 >
+                                                            <TextBox.Text>
+                                                                <Binding Path="Rsa.P" Converter="{StaticResource BigIntegerToStringConverter}">
+                                                                    <Binding.ValidationRules>
+                                                                        <validations:PrimalityValidation />
+                                                                    </Binding.ValidationRules>
+                                                                </Binding>
+                                                            </TextBox.Text>
                                                         </TextBox>
                                                     </StackPanel>
-
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
                                                                 HorizontalAlignment="Stretch">
-                                                        <Label Content="Жәй сан q" Margin="10,4,0,0" Height="26"
+                                                        <Label Content="Q жай саны" Margin="10,4,0,0" Height="26"
                                                                Width="70"
                                                                VerticalAlignment="Top" HorizontalAlignment="Left" />
-                                                        <TextBox Text="{Binding Rsa.Q}"
-                                                                 Margin="6" HorizontalAlignment="Stretch"
-                                                                 VerticalAlignment="Top"
-                                                                 Style="{StaticResource OnlyPlaceHolder}" Tag="997"
-                                                                 Height="24" Width="184">
-                                                        </TextBox>
+                                                        <TextBox
+                                                            Margin="6" HorizontalAlignment="Stretch"
+                                                            VerticalAlignment="Top"
+                                                            Height="24" Width="184"
+                                                            Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                                                            Style="{StaticResource PrimeTextBox}"
+                                                        >
+                                                            <TextBox.Text>
+                                                                <Binding Path="Rsa.Q" Converter="{StaticResource BigIntegerToStringConverter}">
+                                                                    <Binding.ValidationRules>
+                                                                        <validations:PrimalityValidation />
+                                                                    </Binding.ValidationRules>
+                                                                </Binding>
+                                                            </TextBox.Text>
+                                                        </TextBox> 
                                                     </StackPanel>
                                                     <StackPanel>
                                                         <Button VerticalAlignment="Center"
                                                                 HorizontalAlignment="Stretch"
                                                                 Height="24"
-                                                                Margin="6">
+                                                                Margin="6"
+                                                                Command="{Binding GeneratePrimesCommand}"
+                                                                >
                                                             Генерациялау
                                                         </Button>
                                                     </StackPanel>
@@ -425,11 +455,11 @@
                                                 <StackPanel Orientation="Vertical" VerticalAlignment="Stretch">
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
                                                                 HorizontalAlignment="Stretch">
-                                                        <Label Content="N модуль" Margin="10,4,0,0" Height="26"
+                                                        <Label Content="N модулі" Margin="10,4,0,0" Height="26"
                                                                Width="110"
                                                                VerticalAlignment="Top" HorizontalAlignment="Left" />
-                                                        <TextBox Text="{Binding Rsa.N}"
-                                                                 Margin="6" HorizontalAlignment="Stretch"
+                                                        <TextBox Text="{Binding Rsa.N, Mode=OneWay}"
+                                                            Margin="6" HorizontalAlignment="Stretch"
                                                                  VerticalAlignment="Top"
                                                                  Height="24" Width="184"
                                                                  IsReadOnly="True"
@@ -441,7 +471,7 @@
                                                                Height="26"
                                                                Width="110"
                                                                VerticalAlignment="Top" HorizontalAlignment="Left" />
-                                                        <TextBox Text="{Binding Rsa.Totient}"
+                                                        <TextBox Text="{Binding Rsa.Totient, Mode=OneWay}"
                                                                  Margin="6" HorizontalAlignment="Stretch"
                                                                  VerticalAlignment="Top"
                                                                  Height="24" Width="184"
@@ -453,23 +483,26 @@
                                                         <Label Content="Ашық кілт e" Margin="10,4,0,0" Height="26"
                                                                Width="110"
                                                                VerticalAlignment="Top" HorizontalAlignment="Left" />
-                                                        <TextBox Text="{Binding Rsa.E}"
+                                                        <TextBox Text="{Binding Rsa.E, Mode=OneWay}"
                                                                  Margin="6" HorizontalAlignment="Stretch"
                                                                  VerticalAlignment="Top"
-                                                                 Height="24" Width="184" />
+                                                                 IsReadOnly="True"
+                                                                 Height="24" Width="184" 
+                                                                 Background="#FFE5E5E5" />
                                                     </StackPanel>
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
                                                                 HorizontalAlignment="Stretch">
                                                         <Label Content="Жабық кілт d" Margin="10,4,0,0" Height="26"
                                                                Width="110"
                                                                VerticalAlignment="Top" HorizontalAlignment="Left" />
-                                                        <TextBox Text="{Binding Rsa.D}"
+                                                        <TextBox Text="{Binding Rsa.D, Mode=OneWay}"
                                                                  Margin="6" HorizontalAlignment="Stretch"
                                                                  VerticalAlignment="Top"
                                                                  Height="24" Width="184"
                                                                  IsReadOnly="True"
                                                                  Background="#FFE5E5E5" />
                                                     </StackPanel>
+                                                    <Button Width="120" HorizontalAlignment="Center" Command="{Binding CalculateKeysCommand}">Кілттерді есептеу</Button>
                                                 </StackPanel>
                                             </GroupBox>
                                         </Grid>

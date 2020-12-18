@@ -6,6 +6,7 @@ using CryptoLearn.Helper;
 using CryptoLearn.Interfaces;
 using CryptoLearn.Models;
 using System.Numerics;
+using Microsoft.Xaml.Behaviors.Core;
 
 
 namespace CryptoLearn.ViewModels
@@ -21,6 +22,13 @@ namespace CryptoLearn.ViewModels
 
         #endregion
 
+        #region Commands
+
+        public ICommand GeneratePrimesCommand { get; set; }
+        public ICommand CalculateKeysCommand { get; set; }
+
+        #endregion
+        
         #region Properties
         
         public EncryptionType EncryptionType
@@ -77,6 +85,8 @@ namespace CryptoLearn.ViewModels
         public RsaViewModel()
         {
             Rsa = new Rsa();
+            GeneratePrimesCommand = new RelayCommand(o => Rsa.GeneratePrimes());
+            CalculateKeysCommand = new RelayCommand(o => Rsa.CalculateDAndE());
         }
 
         #endregion

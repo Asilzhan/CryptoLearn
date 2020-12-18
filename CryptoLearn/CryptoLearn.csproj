@@ -10,6 +10,7 @@
     <Page Update="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Remove="Images\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,8 +20,6 @@
 
   <ItemGroup>
     <ApplicationDefinition Remove="App.xaml" />
-    <None Remove="Views\leftArrow.png" />
-    <None Remove="Views\UpArrow.png" />
     <ApplicationDefinition Include="Views\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -28,16 +27,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Images" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Views\leftArrow.png" />
-    <Resource Include="Views\UpArrow.png" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PrimeHelper\PrimeHelper.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Images\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Images\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Images\**" />
   </ItemGroup>
 
 </Project>
