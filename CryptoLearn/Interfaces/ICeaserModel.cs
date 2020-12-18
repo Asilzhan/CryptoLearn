@@ -4,7 +4,7 @@
 	{
 		public string Alphabet { get; set; }
 
-		public string ShiftedAlphabet { get; set; }
+		public string ShiftedAlphabet { get; }
 		public int Key { get; set; }
 		
 		public string Encrypt(string ceaserPlainText);

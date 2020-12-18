@@ -8,7 +8,7 @@ namespace CryptoLearn.Interfaces
 
 		public string Alphabet { get; set; }		
 		public string Key { get; set; }
-		public ObservableCollection<string> ShiftedAlphabet { get; set; }
+		public ObservableCollection<string> ShiftedAlphabet { get; }
 		
 		public string Encrypt(string plainText);
 		public string Decrypt(string plainText);
