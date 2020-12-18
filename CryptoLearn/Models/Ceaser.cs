@@ -12,11 +12,8 @@ namespace CryptoLearn.Models
 		
 		#region Private members
 
-		private string _plainText;
 		private string _alphabet;
-		private string _cipherText;
 		private int _key;
-		
 
 		#endregion
 
@@ -46,11 +43,7 @@ namespace CryptoLearn.Models
 			}
 		}
 
-		public string ShiftedAlphabet
-		{
-			get => Alphabet.Substring(Key % Alphabet.Length) + Alphabet.Substring(0, Key % Alphabet.Length);
-			set{}
-		}
+		public string ShiftedAlphabet => Alphabet.Substring(Key % Alphabet.Length) + Alphabet.Substring(0, Key % Alphabet.Length);
 
 		#endregion
 

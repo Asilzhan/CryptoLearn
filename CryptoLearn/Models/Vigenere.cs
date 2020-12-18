@@ -56,7 +56,6 @@ namespace CryptoLearn.Models
 
 				return res;
 			} 
-			set{}
 		}
 
 		#endregion
