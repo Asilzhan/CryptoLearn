@@ -1,4 +1,6 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
+using System.Text;
 
 namespace CryptoLearn.Interfaces
 {
@@ -10,13 +12,11 @@ namespace CryptoLearn.Interfaces
 		public BigInteger D { get; set; }
 		public BigInteger Totient { get; }
 		public BigInteger N { get; }
-		public string Alphabet { get; set; }
-		public string PlainText { get; set; }
-		public string CipherText { get; set; }
-		public byte[] Encrypt(byte[] arr);
-		public byte[] Decrypt(byte[] arr);
-		public byte[] StringToByteArray(string s);
-		public string ByteArrayToString(byte[] b);
+		public string Alphabet { get; }
+		public ulong[] Encrypt(ulong[] arr);
+		public ulong[] Decrypt(ulong[] arr);
+		public ulong[] StringToULongArray(string s, Encoding encoding);
+		public string ULongArrayToString(ulong[] b, Encoding encoding);
 		public void GeneratePrimes();
 		public void CalculateDAndE();
 	}

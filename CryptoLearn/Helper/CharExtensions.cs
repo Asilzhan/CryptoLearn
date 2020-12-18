@@ -1,4 +1,8 @@
-﻿namespace CryptoLearn.Helper
+﻿using System;
+using System.Numerics;
+using System.Text;
+
+namespace CryptoLearn.Helper
 {
 	public static class CharExtensions
 	{
@@ -7,5 +11,9 @@
 			if (char.IsUpper(to)) return char.ToUpper(from);
 			return from;
 		}
+	}
+	public static class ArrayExtensions
+	{
+
 	}
 }

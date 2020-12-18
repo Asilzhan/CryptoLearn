@@ -142,7 +142,6 @@ namespace CryptoLearn.ViewModels
                 return Brushes.Red;
             }
         }
-
         #endregion
 
         #region Constuctor
