@@ -6,6 +6,7 @@ using CryptoLearn.Helper;
 using CryptoLearn.Interfaces;
 using CryptoLearn.Models;
 using System.Numerics;
+using System.Text;
 using Microsoft.Xaml.Behaviors.Core;
 
 
@@ -18,7 +19,8 @@ namespace CryptoLearn.ViewModels
         private EncryptionType _encryptionType;
         private string _plainText;
         private string _cipherText;
-        private Alphabet _alphabetPresenter;
+        private ulong[] _plainTextNumberRepresentation;
+        private ulong[] _cipherTextNumberRepresentation;
 
         #endregion
 
@@ -26,6 +28,7 @@ namespace CryptoLearn.ViewModels
 
         public ICommand GeneratePrimesCommand { get; set; }
         public ICommand CalculateKeysCommand { get; set; }
+        public ICommand EncryptCommand { get; set; }
 
         #endregion
         
@@ -64,19 +67,29 @@ namespace CryptoLearn.ViewModels
             }
         }
 
-        public Alphabet AlphabetPresenter
+        public IRsaModel Rsa { get; set; }
+
+        public ulong[] PlainTextNumberRepresentation
         {
-            get => _alphabetPresenter;
+            get => _plainTextNumberRepresentation;
             set
             {
-                if (value.Equals(_alphabetPresenter)) return;
-                _alphabetPresenter = value;
-                Rsa.Alphabet = value.Value;
+                if (Equals(value, _plainTextNumberRepresentation)) return;
+                _plainTextNumberRepresentation = value;
                 OnPropertyChanged();
             }
         }
-        
-        public IRsaModel Rsa { get; set; }
+
+        public ulong[] CipherTextNumberRepresentation
+        {
+            get => _cipherTextNumberRepresentation;
+            set
+            {
+                if (Equals(value, _cipherTextNumberRepresentation)) return;
+                _cipherTextNumberRepresentation = value;
+                OnPropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -87,6 +100,17 @@ namespace CryptoLearn.ViewModels
             Rsa = new Rsa();
             GeneratePrimesCommand = new RelayCommand(o => Rsa.GeneratePrimes());
             CalculateKeysCommand = new RelayCommand(o => Rsa.CalculateDAndE());
+            EncryptCommand = new RelayCommand(o => Encrypt(), o => !string.IsNullOrEmpty(PlainText));
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void Encrypt()
+        {
+            PlainTextNumberRepresentation = Rsa.StringToULongArray(PlainText, Encoding.Unicode);
+            CipherTextNumberRepresentation = Rsa.Encrypt(PlainTextNumberRepresentation);
         }
 
         #endregion

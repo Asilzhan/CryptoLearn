@@ -2,16 +2,13 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Numerics;
+using System.Resources;
 using System.Runtime.CompilerServices;
-using System.Threading;
+using System.Text;
 using CryptoLearn.Annotations;
-using CryptoLearn.Helper;
 using CryptoLearn.Interfaces;
 using PrimeHelper.Primality;
-using PrimeHelper.Primality.Deterministic;
 using PrimeHelper.Primality.Heuristic;
-using PrimeHelper.Randomness;
-using Timer = System.Timers.Timer;
 
 namespace CryptoLearn.Models
 {
@@ -23,8 +20,6 @@ namespace CryptoLearn.Models
 		private BigInteger _d;
 		private BigInteger _p;
 		private BigInteger _q;
-		private string _plainText;
-		private string _cipherText;
 
 		#endregion
 
@@ -32,31 +27,19 @@ namespace CryptoLearn.Models
 		{
 			P = 13;
 			Q = 97;
+			
+			string text = "AsilzhanАлмат1234567890Қ";
+			var t1 = StringToULongArray(text);
+			var t2 = Encrypt(t1);
+			var t3 = Decrypt(t2);
+			var t4 = ULongArrayToString(t1);
+			Debug.Assert(text.Equals(t4));
 		}
 		
 		#region Properties
 
-		public string Alphabet { get; set; }
-		public string PlainText
-		{
-			get => _plainText;
-			set
-			{
-				if (value == _plainText) return;
-				_plainText = value;
-				OnPropertyChanged();
-			}
-		}
-		public string CipherText
-		{
-			get => _cipherText;
-			set
-			{
-				if (value == _cipherText) return;
-				_cipherText = value;
-				OnPropertyChanged();
-			}
-		}
+		public string Alphabet =>
+			"abcdefghijklmnopqrstuvwxyz,.?!;:\"()'+-*/~@#$%^&-=_0123456789 №<>аәбвгғдеёжзийкқлмнңоөпрстуұүфхһцчшщъыіьэюя[\\]{|}─│┌┐└┘├┤┬┴┼═║╒‰₸";
 
 		public BigInteger P
 		{
@@ -110,25 +93,55 @@ namespace CryptoLearn.Models
 
 		#region Methods
 
-		public byte[] Encrypt(byte[] arr)
+		public ulong[] Encrypt(ulong[] arr)
 		{
-			throw new NotImplementedException();
+			ulong[] res = new ulong[arr.Length];
+			for (int i = 0; i < arr.Length; i++)
+			{
+				res[i] = (ulong) BigInteger.ModPow(arr[i], D, N);
+			}
+
+			return res;
 		}
 
-		public byte[] Decrypt(byte[] arr)
+		public ulong[] Decrypt(ulong[] arr)
 		{
-			throw new NotImplementedException();
+			ulong[] res = new ulong[arr.Length];
+			for (int i = 0; i < arr.Length; i++)
+			{
+				res[i] = (ulong) BigInteger.ModPow(arr[i], E, N);
+			}
+
+			return res;
 		}
 
-		public byte[] StringToByteArray(string s)
+		public ulong[] StringToULongArray(string s, Encoding encoding = null)
 		{
-			throw new NotImplementedException();
-		}
+			Span<byte> t = (encoding ?? Encoding.Unicode).GetBytes(s);
+			ulong[] res = new ulong[t.Length / 8];
+			for (int i = 0; i < res.Length; i++)
+			{
+				res[i] = BitConverter.ToUInt64(t.Slice(8 * i, 8));
+			}
 
-		public string ByteArrayToString(byte[] b)
-		{
-			throw new NotImplementedException();
+			return res;
 		}
+		
+		public string ULongArrayToString(ulong[] b, Encoding encoding = null)
+		{
+			byte[] t = new byte[b.Length * 8];
+			for (int i = 0; i < b.Length; i++)
+			{
+				var bytes = BitConverter.GetBytes(b[i]);
+				for (int j = 0; j < 8; j++)
+				{
+					t[8 * i + j] = bytes[j];
+				}
+			}
+
+			return (encoding ?? Encoding.Unicode).GetString(t);
+		}
+		
 		public void GeneratePrimes()
 		{
 			P = GeneratePrime();
@@ -146,7 +159,7 @@ namespace CryptoLearn.Models
 			
 		}
 
-		public BigInteger GeneratePrime()
+		private BigInteger GeneratePrime()
 		{
 			return PrimeHelper.Tools.PrimaryBigInteger
 				.GenerateProbablyPrime(32).Result;
@@ -165,7 +178,9 @@ namespace CryptoLearn.Models
 			E = e;
 			D = x;
 
-			Debug.Assert(E * D + y * Totient == 1);
+			BigInteger.DivRem(E * D, Totient, out var t);
+			BigInteger.DivRem(t + Totient, Totient, out var rem);
+			Debug.Assert(rem == 1);
 		}
 
 		#endregion

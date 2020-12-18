@@ -71,6 +71,7 @@ namespace CryptoLearn.ViewModels
         public ICommand SwapTextCommand { get; set; }
 
         public bool IsValid { get; set; }
+        
         #endregion
 
         #region Constuctor

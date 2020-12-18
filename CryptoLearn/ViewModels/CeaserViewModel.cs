@@ -80,7 +80,7 @@ namespace CryptoLearn.ViewModels
             EncryptCommand = new RelayCommand(o =>
             {
                 if (EncryptionType == EncryptionType.Encrypt)
-                    PlainText = Ceaser.Encrypt(PlainText);
+                    CipherText = Ceaser.Encrypt(PlainText);
                 else CipherText = Ceaser.Decrypt(PlainText);
             });
             SwapTextCommand = new RelayCommand(o =>

@@ -513,21 +513,15 @@
                                         <StackPanel Orientation="Vertical">
                                             <Label Content="Кіріс мәтін" Margin="6,6,0,0" Height="26"
                                                    VerticalAlignment="Top" HorizontalAlignment="Left" />
-                                            <TextBox Text=""
-                                                     Margin="6,0" HorizontalAlignment="Stretch"
+                                            <TextBox Text="{Binding PlainText, UpdateSourceTrigger = PropertyChanged}"
+                                                     Margin="6,0" 
+                                                     HorizontalAlignment="Stretch"
                                                      VerticalAlignment="Top"
-                                                     Height="24" />
+                                                     Height="24" 
+                                            />
                                             <Label Content="Кіріс мәтін" Margin="6,6,0,0" Height="26"
                                                    VerticalAlignment="Top" HorizontalAlignment="Left" />
-                                            <TextBox Text=""
-                                                     Margin="6,0" HorizontalAlignment="Stretch"
-                                                     VerticalAlignment="Top"
-                                                     Height="24"
-                                                     IsReadOnly="True"
-                                                     Background="#FFE5E5E5" />
-                                            <Label Content="Кіріс мәтін" Margin="6,6,0,0" Height="26"
-                                                   VerticalAlignment="Top" HorizontalAlignment="Left" />
-                                            <TextBox Text=""
+                                            <TextBox Text="{Binding PlainTextNumberRepresentation, Converter={StaticResource SpacedCapitalConverter}}"
                                                      Margin="6,0" HorizontalAlignment="Stretch"
                                                      VerticalAlignment="Top"
                                                      Height="24"
@@ -535,7 +529,7 @@
                                                      Background="#FFE5E5E5" />
                                             <Label Content="Кіріс мәтін" Margin="6,6,0,0" Height="26"
                                                    VerticalAlignment="Top" HorizontalAlignment="Left" />
-                                            <TextBox Text=""
+                                            <TextBox Text="{Binding CipherTextNumberRepresentation, Converter={StaticResource SpacedCapitalConverter}}"
                                                      Margin="6,0" HorizontalAlignment="Stretch"
                                                      VerticalAlignment="Top"
                                                      Height="24"
@@ -545,6 +539,7 @@
                                             <Button Margin="6,6"
                                                     HorizontalAlignment="Stretch"
                                                     Content="{Binding EncryptionType}"
+                                                    Command="{Binding EncryptCommand}"
                                                     Height="24" />
                                         </StackPanel>
                                     </GroupBox>
