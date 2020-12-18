@@ -121,7 +121,10 @@
 
                                                 <Label Grid.Column="1" Margin="10,36,0,0" Content="Кілт" Height="26"
                                                        VerticalAlignment="Top" HorizontalAlignment="Left" />
-                                                <TextBox Grid.Column="2" Text="{Binding Ceaser.Key}" Margin="10,36,0,0"
+                                                <TextBox Grid.Column="2" 
+                                                         Text="{Binding Ceaser.Key}" 
+                                                         Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                                                         Margin="10,36,0,0"
                                                          Height="26" Width="100" VerticalAlignment="Top"
                                                          HorizontalAlignment="Left" />
                                             </Grid>
@@ -181,11 +184,108 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="Description" Style="{StaticResource secondaryTabStyle}">
-
+                            <Grid>
+                                <FlowDocumentScrollViewer>
+                                    <FlowDocument>
+                                        <Paragraph>
+                                            <Span Background="Wheat">
+                                                <Italic>Цезарь шифры</Italic>
+                                            </Span>
+                                        </Paragraph>
+                                        <Paragraph FontSize="14">Цезарь шифры - ең жеңіл және кеңінен тараған шифр әдісі. Оны Цезарь коды, Цезарь жылжытуы немесе жылжыту шифры деп те атайды.</Paragraph>
+                                        <Paragraph FontSize="14">Шифр орнына қоюдың бір түрі деп те атауға болады. Шифрде әрбір таңба ашық мәтінде әліпби бойынша тұрақты көлемде оңға немесе солға жылжытылып отырады.Мысалы, жылжыту саны 3 болатын шифрде А әрібі В, Ә әрібі Г ауыстырылады.</Paragraph>
+                                        <BlockUIContainer>
+                                            <Image Source="/Views/Caesar.png" Width="474" Height="200"/>
+                                        </BlockUIContainer>
+                                        <Paragraph FontSize="14">Шифр рим императоры Гай Юлий Цезарь атымен аталған.Ол осы шифрды өзінің генералдарымен қолданған.</Paragraph>
+                                        <Paragraph FontSize="14">Бұл шифрование көбінесе көптеген күрделі шифрдің бөлігі ретінде қолданады, мысалы, Виженер шифры. Цезарь шифры әлі де ROT13 системасында қолданыс табуда. Барлық монолитті шифрлер секілді Цезарь шифрі де тез сындырылады, практикада мүлдем қолданыс көрмейді.</Paragraph>
+                                        <Paragraph>
+                                            <Span Background="Wheat">
+                                                <Italic>
+                                                    <Underline>
+                                                        Математикалық моделі
+                                                    </Underline>
+                                                </Italic>
+                                            </Span>
+                                        </Paragraph>
+                                        <Paragraph FontSize="14">Егер әліпбидегі әрбір әріпке өз санын қойып шықса (0 бастап), онда шифрлау мен шифрын анықтауды модульдік арифметиканы қолдана отырып мынадай формуламен табамыз:</Paragraph>
+                                        <Paragraph FontSize="14" TextAlignment="Center">
+                                            <Italic>y=(x+k)mod n</Italic>
+                                        </Paragraph>
+                                        <Paragraph FontSize="14" TextAlignment="Center">
+                                            <Italic>x=(y-x)mod n</Italic>
+                                        </Paragraph>
+                                        <Paragraph FontSize="14">
+                                            мұндағы 
+                                            <Italic>x</Italic>
+                                            — ашық мәтіннің таңбасы,
+                                            <Italic>y</Italic>
+                                            — шифрланған мәтіннің таңбасы,
+                                            <Italic>n</Italic>
+                                            — әліпби күші, ал
+                                            <Italic>k</Italic>
+                                            — кілт. Математикалық тұрғыда Цезарь шифры Афин шифрының өзгертілген түрі болып табылады.
+                                        </Paragraph>
+                                        <Paragraph>
+                                            <Span Background="Wheat">
+                                                <Italic>
+                                                    <Underline>
+                                                        Қолдану тарихы
+                                                    </Underline>
+                                                </Italic>
+                                            </Span>
+                                        </Paragraph>
+                                        <Paragraph FontSize="14">
+                                            <Span Foreground="Red">Он екі Цезарь өміріне</Span> сенсек Гай Светоний Транквилл оны үш орынға жылжыту арқылы әскери ақпарат жіберуде қолданған. Цезарь алғашқы шифр қолданушы ретінде тарихта қалғанымен,алдында басқа шифрлеу әдістері де қолданғанын білеміз.
+                                            <Italic>Егер онда конфидициеалды жіберу болса, ол осы шифрды қолданған,мәселен, әліпби ретін ауыстырған.Сонда ешқандай сөзді түсінуге мүмкіншілік болмаған.Егер мәтінді түсінгісі келсе төртінші әріпті қою міндетті еді.Мысалы, А әрпі В..|</Italic>
+                                            <Span Foreground="Red">Гай Светоний Транквилл|Он екі Цезарьдің өмірі 56</Span> 
+                                        </Paragraph>
+                                        <Paragraph FontSize="14">
+                                            Оның жиені, Август, қолданыста осы шифрлеу әдісін ұстанған. Бірақ ол оңға қарай бір орын жылжытуды ұстанған.
+                                            <Italic>Шифрлеген кезде А орнына Ә, Ә орнына Б қойған.|</Italic>
+                                            <Span Foreground="Red">Гай Светоний Транквилл|Он екі Цезарьдің өмірі 88</Span> 
+                                        </Paragraph>
+                                        <Paragraph FontSize="14">Юлий Цезарьдің қиынырақ схемалар қолданғанына дәлелдер табылуда.</Paragraph>
+                                        <Paragraph FontSize="14">Цезарьдің шифрлеу әдісі қаншалықты тиімді болғаны белгісіз. Бірақ Цезарьдің көптеген жаулары сауатсыз болғандықтан, шифр басқа тілде жазылған деп ойлағандықтан шифр айтарлықтай қауіпсіз болған. Шифрды сындыру жайлы ешқандай деректер жоқ.Ең алғашқы дерек 9-ғасырда өмір сүрген әл Кинди жазбаларында кезедеседі. Цезарь шифры бір орынға жылжыту кері жылжыту Мезузада Құдай аттарын шифрлеу үшін қолданады.Бұл алғашқы кездегі жағдай болуы мүмкін, еврей халқына Мезузаға сенуге рұқсат берілмеген. 19 ғасырда газеттегі жарнама бөлігінде жеңіл шифрды ақпарат алмастыру үшін қолданған. Кан Дэвид Таймс газетінде бұқара халық құпиялы коммуникацияларда өз кезегін бермегені туралы сипаттап жазды. 1915 жылы Цезарь шифры өз қолданысын тапты. Ресей әскері бұл шифрды қиын шифрлер орнына қолданды.Өйткені қиын шифрлер әскерлерге қиындай болды,бірақ неміс,австрия әскерлеріне бұл шифрды табу қиынға соқпады.</Paragraph>
+                                        <Paragraph FontSize="14">Он үш орынға жылжытылып шифр ROT13] алгоритмінде қолданылады,қарапайым мәтін шатастыру тәсілінде Usenet кеңінен қолданады.Көбінесе спойлерді тығу үшін қолданады. Виженер шифры Цезарь шифрын әр түрлі жылжытулар арқылы қолданады.Жылжыту кілт сөз арқылы анықталады.Егер кілт ұзындығы мәтін ұзындығына тең болса,бұл сындырылмайтын шифрге айналады. 2006 жылы мафия бастығы Бернардо Провенцано Сицилияда Цезарь шифрын өзінің хабарламаларының криптоанализінде қолданғаны үшін ұсталды. Провенцано шифрды "A" әріпі 4 орында "Ә" әріпі 5 орында тұрған бойында қолданған.</Paragraph>
+                                        <Paragraph FontSize="14">Цезарь шифрын жеңіл қолдану үшін ортақ оське кіргізілген 2 диаметрлері әр түрлі шеттерінде әліпби жазылған дисктерді қолданады. Алғашында дисктер әр дисктегі әріптері сәйкестендіріліп тұрғызады, сосын қанша орынға жылжыту арқылы Цезарь шифры шығады. Мысалы, А әріпін В әріпіне жылжытсақ 3 орынға солға жылжыған шифрды аламыз.</Paragraph>
+                                        <Paragraph>
+                                            <Span Background="Wheat">
+                                                <Italic>
+                                                    <Underline>
+                                                        Шифрды бұзу
+                                                    </Underline>
+                                                </Italic>
+                                            </Span>
+                                        </Paragraph>
+                                        <Paragraph FontSize="14">Цезарь шифры тек қана шифрланған сөз белгілі болғанда да жеңіл бұзылады. Екі түрлі жағдай қарастыруға болады:</Paragraph>
+                                        <List MarkerStyle="Decimal" FontSize="14">
+                                            <ListItem>
+                                                <Paragraph>бұзушы жеңіл шифр қолданғаны туралы біледі, бірақ нақты Цезарь шифры екенін білмейді.</Paragraph>
+                                            </ListItem>
+                                            <ListItem>
+                                                <Paragraph>бұзушы Цезарь шифры қолданғанын біледі, бірақ қанша орынға жылжығанын білмейді.</Paragraph>
+                                            </ListItem>
+                                        </List>
+                                        <Paragraph FontSize="14">Бірінші жағдайда шифр орнына қою арқылы тез бұзылуы мүмкін,мысалы жиілікті анализ тағы сондай сондай. Бұл әдісті қолдана отырып ол шифрдің қайталануынан бұл Цезарь шифры екенін тез байқауы мүмкін.</Paragraph>
+                                        <Paragraph FontSize="14">
+                                            Екінші жағдайда шифрды бұзу одан әрі жеңіл болып келеді.Жылжыту орны онша көп емес,сондықтан қатты күш арқылы шифрды бұзуға болады. Бұны істеудің техникасы көбінесе шифрланған сөздің бөлігі алынып оны барлық мүмкін жылжытуларға қойып шығу(қазақ тілінде 42).Кейде оны "жай компоненттің бітілу" техникасы деп те атайды.
+                                            <Bold>" EXXEGOEXSRGI"</Bold>
+                                            шифрланған сөзіне мысал келтірейік, дұрыс мәтінде сөз төртінші қатарда тұрғанын көріп тұрмыз.
+                                        </Paragraph>
+                                        <Paragraph FontSize="14">Бұл әдісті басқа жолмен қолдануға болады-әр әріптің астына осы әріптен бастап әліпби толығымен жазылады.Бұл әдіс егер алдын ала әліпби жазылған жолақтар дайын болса тездетіледі. Ол үшін бір жолақта шифрланған сөз пайда болу керек,сонда қалған бөлігінде біз дұрыс мәтінді көреміз.</Paragraph>
+                                        <Paragraph FontSize="14">
+                                            Қарапайым мәтінде тек қана қайта шифрлаудың бір ғана нұсқасы болады. Ал егер өте қысқа болса сөздің бірнеше нұсқасы болуы мүмкін.Мысалы, шифрланған
+                                            <Bold>MPQY </Bold> сөзі қайта шифрланғанда <Bold>"aden"</Bold> және  <Bold>"know"</Bold> (шифрланған мәтен ағылшын ілінде жазылды). Тура осылай <Bold> "ALIIP"</Bold> сөзін <Bold>"dolls"</Bold> деп немесе <Bold>"wheel"</Bold> деп шифрды шешуге болады; <Bold>"AFCCP" </Bold>сөзін <Bold> "jolly"</Bold> немесе <Bold>"cheer"</Bold> деп бірнеше түрде шифрды шешуге болады.
+                                        </Paragraph>
+                                        <Paragraph FontSize="14">Бірнеше рет шифрлау табандылықты ешқалай жақсартпайды.Өйткені a және b жылжыту шифры a+b шифрына тең болып келеді.</Paragraph>
+                                    </FlowDocument>
+                                </FlowDocumentScrollViewer>
+                            </Grid>
                         </TabItem>
 
                         <TabItem Header="Code" Style="{StaticResource secondaryTabStyle}">
-
+                            
                         </TabItem>
                     </TabControl>
                 </Grid>
@@ -245,11 +345,15 @@
                                                 <Label Grid.Column="1" Margin="10,36,0,0" Content="Кілт"
                                                        Height="26"
                                                        VerticalAlignment="Top" HorizontalAlignment="Left" />
-                                                <TextBox Grid.Column="2" Text="{Binding Vigenere.Key}"
+                                                <TextBox Grid.Column="2" 
                                                          Margin="10,36,0,0"
                                                          Height="26" Width="100" VerticalAlignment="Top"
                                                          HorizontalAlignment="Left"
-                                                         Style="{StaticResource OnlyPlaceHolder}" Tag="Сөз" />
+                                                         Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                                                         Style="{StaticResource StringKeyTextBox}"
+                                                         BorderBrush="{Binding BorderBrush}"
+                                                         Text="{Binding Key, UpdateSourceTrigger=PropertyChanged}">
+                                                </TextBox>
                                             </Grid>
                                         </Grid>
                                     </GroupBox>
@@ -264,10 +368,14 @@
                                                 <RowDefinition Height="1*" />
                                             </Grid.RowDefinitions>
 
-                                            <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding PlainText}"
+                                            <TextBox Grid.Row="0" Grid.Column="0"
                                                      Margin="6" HorizontalAlignment="Stretch"
                                                      VerticalAlignment="Stretch"
-                                                     Style="{StaticResource placeHolder}" Tag="Input">
+                                                     Style="{StaticResource StringKeyTextBox}"
+                                                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                                                     BorderBrush="{Binding BorderBrushPlainText}"
+                                                     Text="{Binding PlainText, UpdateSourceTrigger=PropertyChanged}"
+                                                     >
 
                                             </TextBox>
 
@@ -276,7 +384,7 @@
                                                     Height="24"
                                                     Width="120"
                                                     Command="{Binding SwapTextCommand}">
-                                                <Image Source="../Resources/leftArrow.png" />
+                                                <Image Source="/Views/UpArrow.png" />
                                             </Button>
 
                                             <TextBox Grid.Row="2" Text="{Binding CipherText}"
@@ -291,8 +399,6 @@
                                                     Height="24"
                                                     Width="120"
                                                     Command="{Binding EncryptCommand}" />
-
-
                                         </Grid>
                                     </GroupBox>
                                 </Grid>
@@ -301,21 +407,27 @@
 
                         <TabItem Header="Description" Style="{StaticResource secondaryTabStyle}">
                             <Grid>
-                                <ListView Margin="10"
-                                          ItemsSource="{Binding Vigenere.ShiftedAlphabet}"
-                                          Focusable="False"
-                                          HorizontalAlignment="Center">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Margin="0"
-                                                       Height="14"
-                                                       HorizontalAlignment="Center"
-                                                       Text="{Binding Converter={StaticResource SpacedCapitalConverter}}"
-                                                       TextAlignment="Center" FontFamily="Consolas">
-                                            </TextBlock>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
+                                <FlowDocumentScrollViewer>
+                                    <FlowDocument>
+                                        <BlockUIContainer>
+                                            <ListView 
+                                                      ItemsSource="{Binding Vigenere.ShiftedAlphabet}"
+                                                      Focusable="False"
+                                                      HorizontalAlignment="Center">
+                                                <ListView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Margin="0"
+                                                                   Height="15"
+                                                                   HorizontalAlignment="Center"
+                                                                   Text="{Binding Converter={StaticResource SpacedCapitalConverter}}"
+                                                                   TextAlignment="Center" FontFamily="Consolas">
+                                                        </TextBlock>
+                                                    </DataTemplate>
+                                                </ListView.ItemTemplate>
+                                            </ListView>
+                                        </BlockUIContainer>
+                                    </FlowDocument>
+                                </FlowDocumentScrollViewer>
                             </Grid>
                         </TabItem>
 

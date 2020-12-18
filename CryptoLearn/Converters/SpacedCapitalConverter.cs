@@ -7,15 +7,27 @@ namespace CryptoLearn.Converters
     public class SpacedCapitalConverter : IValueConverter    
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            string text = value as string;
+        {            
             string res = "";
-            for (int i = 0; i < text.Length; i++)
+            if (value is string)
             {
-                res += char.ToUpper(text[i]);
-                res += " ";
+                string text = value as string;
+                for (int i = 0; i < text.Length; i++)
+                {
+                    res += char.ToUpper(text[i]);
+                    res += " ";
+                }
             }
 
+            if (value is ulong[])
+            {
+                ulong[] ulongs = value as ulong[];
+                foreach (var t in ulongs)
+                {
+                    res += t;
+                    res += "#";
+                }
+            }
             return res;
         }
 
