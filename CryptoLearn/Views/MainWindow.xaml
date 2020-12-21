@@ -647,12 +647,29 @@
                                                      Height="24"
                                                      IsReadOnly="True"
                                                      Background="#FFE5E5E5" />
-
-                                            <Button Margin="6,6"
-                                                    HorizontalAlignment="Stretch"
-                                                    Content="{Binding EncryptionType}"
-                                                    Command="{Binding EncryptCommand}"
-                                                    Height="24" />
+                                            <Label Content="Кіріс мәтін" Margin="6,6,0,0" Height="26"
+                                                   VerticalAlignment="Top" HorizontalAlignment="Left" />
+                                            <TextBox Text="{Binding CipherText}"
+                                                     Margin="6,0" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Top"
+                                                     Height="24"
+                                                     IsReadOnly="True"
+                                                     Background="#FFE5E5E5" />
+                                            <StackPanel Orientation="Horizontal">
+                                                <Button Margin="6,6"
+                                                        HorizontalAlignment="Stretch"
+                                                        Content="{Binding EncryptionType}"
+                                                        Command="{Binding EncryptCommand}"
+                                                        Height="24" />
+                                                <Button Margin="2,6"
+                                                        HorizontalAlignment="Stretch"
+                                                        Height="24"
+                                                        Width="120"
+                                                        Command="{Binding SwapTextCommand}">
+                                                    <Image Source="/Views/UpArrow.png" />
+                                                </Button>
+                                            </StackPanel>
+                                            
                                         </StackPanel>
                                     </GroupBox>
                                 </Grid>
