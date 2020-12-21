@@ -648,14 +648,14 @@
                                 <Grid Grid.Row="1" Background="#FFE5E5E5">
                                     <GroupBox Header="Шифрлау" Margin="10" Foreground="Black">
                                         <StackPanel Orientation="Vertical">
-                                            <Label Content="Кіріс мәтін" Margin="6,6,0,0" Height="26"
+                                            <Label Content="{Binding InputText}" Margin="6,6,0,0" Height="26"
                                                    VerticalAlignment="Top" HorizontalAlignment="Left" />
                                             <TextBox Text="{Binding PlainText, UpdateSourceTrigger = PropertyChanged}"
                                                      Margin="6,0"
                                                      HorizontalAlignment="Stretch"
                                                      VerticalAlignment="Top"
                                                      Height="24" />
-                                            <Label Content="Кіріс мәтін" Margin="6,6,0,0" Height="26"
+                                            <Label Content="{Binding PlainTextNumeric}" Margin="6,6,0,0" Height="26"
                                                    VerticalAlignment="Top" HorizontalAlignment="Left" />
                                             <TextBox
                                                 Text="{Binding PlainTextNumberRepresentation, Converter={StaticResource SpacedCapitalConverter}}"
@@ -664,7 +664,7 @@
                                                 Height="24"
                                                 IsReadOnly="True"
                                                 Background="#FFE5E5E5" />
-                                            <Label Content="Кіріс мәтін" Margin="6,6,0,0" Height="26"
+                                            <Label Content="{Binding  CipherTextNumeric}" Margin="6,6,0,0" Height="26"
                                                    VerticalAlignment="Top" HorizontalAlignment="Left" />
 
                                             <TextBox Text="{Binding CipherTextNumberRepresentation, Converter={StaticResource SpacedCapitalConverter}}"
@@ -673,7 +673,7 @@
                                                      Height="24"
                                                      IsReadOnly="True"
                                                      Background="#FFE5E5E5" />
-                                            <Label Content="Кіріс мәтін" Margin="6,6,0,0" Height="26"
+                                            <Label Content="{Binding OutputText}" Margin="6,6,0,0" Height="26"
                                                    VerticalAlignment="Top" HorizontalAlignment="Left" />
                                             <TextBox Text="{Binding CipherText}"
                                                      Margin="6,0" HorizontalAlignment="Stretch"
