@@ -47,6 +47,10 @@ namespace CryptoLearn.ViewModels
                 if (value == _encryptionType) return;
                 _encryptionType = value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(InputText));
+                OnPropertyChanged(nameof(OutputText));
+                OnPropertyChanged(nameof(CipherTextNumeric));
+                OnPropertyChanged(nameof(PlainTextNumeric));
             }
         }
 
@@ -106,6 +110,58 @@ namespace CryptoLearn.ViewModels
             }
         }
 
+        public string InputText
+        {
+            get
+            {
+                if (EncryptionType == EncryptionType.Encrypt)
+                {
+                    return "Бастапқы мәтін";
+                }
+
+                return "Шифрланған мәтін";
+            }
+        }
+
+        public string PlainTextNumeric
+        {
+            get
+            {
+                if (EncryptionType == EncryptionType.Encrypt)
+                {
+                    return "Бастапқы мәтіннің сандық формасы";
+                }
+
+                return "Шифрланған мәтіннің сандық формасы";
+            }
+        }
+
+        public string OutputText
+        {
+            get
+            {
+                if (EncryptionType == EncryptionType.Encrypt)
+                {
+                    return "Шифрланған мәтін";
+                }
+
+                return "Бастапқы мәтін";
+            }
+        }
+
+        public string CipherTextNumeric
+        {
+            get
+            {
+                if (EncryptionType == EncryptionType.Encrypt)
+                {
+                    return "Шифрланған мәтіннің сандық формасы";
+                }
+
+                return "Бастапқы мәтіннің сандық формасы";
+            }
+        }
+
         #endregion
 
         #region Constructor
@@ -117,10 +173,14 @@ namespace CryptoLearn.ViewModels
             CalculateKeysCommand = new RelayCommand(o => Rsa.CalculateDAndE());
             EncryptCommand = new RelayCommand(o =>
             {
-                if(EncryptionType==EncryptionType.Encrypt)
+                if (EncryptionType == EncryptionType.Encrypt)
+                {
                     Encrypt();
-                else if(EncryptionType==EncryptionType.Decrypt)
+                }
+                else if (EncryptionType == EncryptionType.Decrypt)
+                {
                     Decrypt();
+                }
             }, o => !string.IsNullOrEmpty(PlainText));
             SwapTextCommand = new RelayCommand(o =>
             {
@@ -136,7 +196,6 @@ namespace CryptoLearn.ViewModels
                 CipherText = "";
                 CipherTextNumberRepresentation = null;
             });
-
             Test1();
             Test2();
         }
