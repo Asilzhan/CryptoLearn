@@ -19,7 +19,7 @@
             </ResourceDictionary.MergedDictionaries>
             <converters:EnumBooleanConverter x:Key="EnumBooleanConverter" />
             <converters:SpacedCapitalConverter x:Key="SpacedCapitalConverter" />
-            <converters:BigIntegerToStringConverter x:Key="BigIntegerToStringConverter"/>
+            <converters:BigIntegerToStringConverter x:Key="BigIntegerToStringConverter" />
             <ControlTemplate x:Key="ValidationTemplate">
                 <StackPanel Orientation="Horizontal">
                     <Border BorderBrush="Red" BorderThickness="1">
@@ -121,8 +121,8 @@
 
                                                 <Label Grid.Column="1" Margin="10,36,0,0" Content="Кілт" Height="26"
                                                        VerticalAlignment="Top" HorizontalAlignment="Left" />
-                                                <TextBox Grid.Column="2" 
-                                                         Text="{Binding Ceaser.Key}" 
+                                                <TextBox Grid.Column="2"
+                                                         Text="{Binding Ceaser.Key}"
                                                          Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
                                                          Margin="10,36,0,0"
                                                          Height="26" Width="100" VerticalAlignment="Top"
@@ -195,7 +195,7 @@
                                         <Paragraph FontSize="14">Цезарь шифры - ең жеңіл және кеңінен тараған шифр әдісі. Оны Цезарь коды, Цезарь жылжытуы немесе жылжыту шифры деп те атайды.</Paragraph>
                                         <Paragraph FontSize="14">Шифр орнына қоюдың бір түрі деп те атауға болады. Шифрде әрбір таңба ашық мәтінде әліпби бойынша тұрақты көлемде оңға немесе солға жылжытылып отырады.Мысалы, жылжыту саны 3 болатын шифрде А әрібі В, Ә әрібі Г ауыстырылады.</Paragraph>
                                         <BlockUIContainer>
-                                            <Image Source="/Views/Caesar.png" Width="474" Height="200"/>
+                                            <Image Source="/Views/Caesar.png" Width="474" Height="200" />
                                         </BlockUIContainer>
                                         <Paragraph FontSize="14">Шифр рим императоры Гай Юлий Цезарь атымен аталған.Ол осы шифрды өзінің генералдарымен қолданған.</Paragraph>
                                         <Paragraph FontSize="14">Бұл шифрование көбінесе көптеген күрделі шифрдің бөлігі ретінде қолданады, мысалы, Виженер шифры. Цезарь шифры әлі де ROT13 системасында қолданыс табуда. Барлық монолитті шифрлер секілді Цезарь шифрі де тез сындырылады, практикада мүлдем қолданыс көрмейді.</Paragraph>
@@ -216,7 +216,7 @@
                                             <Italic>x=(y-x)mod n</Italic>
                                         </Paragraph>
                                         <Paragraph FontSize="14">
-                                            мұндағы 
+                                            мұндағы
                                             <Italic>x</Italic>
                                             — ашық мәтіннің таңбасы,
                                             <Italic>y</Italic>
@@ -238,12 +238,12 @@
                                         <Paragraph FontSize="14">
                                             <Span Foreground="Red">Он екі Цезарь өміріне</Span> сенсек Гай Светоний Транквилл оны үш орынға жылжыту арқылы әскери ақпарат жіберуде қолданған. Цезарь алғашқы шифр қолданушы ретінде тарихта қалғанымен,алдында басқа шифрлеу әдістері де қолданғанын білеміз.
                                             <Italic>Егер онда конфидициеалды жіберу болса, ол осы шифрды қолданған,мәселен, әліпби ретін ауыстырған.Сонда ешқандай сөзді түсінуге мүмкіншілік болмаған.Егер мәтінді түсінгісі келсе төртінші әріпті қою міндетті еді.Мысалы, А әрпі В..|</Italic>
-                                            <Span Foreground="Red">Гай Светоний Транквилл|Он екі Цезарьдің өмірі 56</Span> 
+                                            <Span Foreground="Red">Гай Светоний Транквилл|Он екі Цезарьдің өмірі 56</Span>
                                         </Paragraph>
                                         <Paragraph FontSize="14">
                                             Оның жиені, Август, қолданыста осы шифрлеу әдісін ұстанған. Бірақ ол оңға қарай бір орын жылжытуды ұстанған.
                                             <Italic>Шифрлеген кезде А орнына Ә, Ә орнына Б қойған.|</Italic>
-                                            <Span Foreground="Red">Гай Светоний Транквилл|Он екі Цезарьдің өмірі 88</Span> 
+                                            <Span Foreground="Red">Гай Светоний Транквилл|Он екі Цезарьдің өмірі 88</Span>
                                         </Paragraph>
                                         <Paragraph FontSize="14">Юлий Цезарьдің қиынырақ схемалар қолданғанына дәлелдер табылуда.</Paragraph>
                                         <Paragraph FontSize="14">Цезарьдің шифрлеу әдісі қаншалықты тиімді болғаны белгісіз. Бірақ Цезарьдің көптеген жаулары сауатсыз болғандықтан, шифр басқа тілде жазылған деп ойлағандықтан шифр айтарлықтай қауіпсіз болған. Шифрды сындыру жайлы ешқандай деректер жоқ.Ең алғашқы дерек 9-ғасырда өмір сүрген әл Кинди жазбаларында кезедеседі. Цезарь шифры бір орынға жылжыту кері жылжыту Мезузада Құдай аттарын шифрлеу үшін қолданады.Бұл алғашқы кездегі жағдай болуы мүмкін, еврей халқына Мезузаға сенуге рұқсат берілмеген. 19 ғасырда газеттегі жарнама бөлігінде жеңіл шифрды ақпарат алмастыру үшін қолданған. Кан Дэвид Таймс газетінде бұқара халық құпиялы коммуникацияларда өз кезегін бермегені туралы сипаттап жазды. 1915 жылы Цезарь шифры өз қолданысын тапты. Ресей әскері бұл шифрды қиын шифрлер орнына қолданды.Өйткені қиын шифрлер әскерлерге қиындай болды,бірақ неміс,австрия әскерлеріне бұл шифрды табу қиынға соқпады.</Paragraph>
@@ -276,7 +276,11 @@
                                         <Paragraph FontSize="14">Бұл әдісті басқа жолмен қолдануға болады-әр әріптің астына осы әріптен бастап әліпби толығымен жазылады.Бұл әдіс егер алдын ала әліпби жазылған жолақтар дайын болса тездетіледі. Ол үшін бір жолақта шифрланған сөз пайда болу керек,сонда қалған бөлігінде біз дұрыс мәтінді көреміз.</Paragraph>
                                         <Paragraph FontSize="14">
                                             Қарапайым мәтінде тек қана қайта шифрлаудың бір ғана нұсқасы болады. Ал егер өте қысқа болса сөздің бірнеше нұсқасы болуы мүмкін.Мысалы, шифрланған
-                                            <Bold>MPQY </Bold> сөзі қайта шифрланғанда <Bold>"aden"</Bold> және  <Bold>"know"</Bold> (шифрланған мәтен ағылшын ілінде жазылды). Тура осылай <Bold> "ALIIP"</Bold> сөзін <Bold>"dolls"</Bold> деп немесе <Bold>"wheel"</Bold> деп шифрды шешуге болады; <Bold>"AFCCP" </Bold>сөзін <Bold> "jolly"</Bold> немесе <Bold>"cheer"</Bold> деп бірнеше түрде шифрды шешуге болады.
+                                            <Bold>MPQY </Bold> сөзі қайта шифрланғанда <Bold>"aden"</Bold> және
+                                            <Bold>"know"</Bold> (шифрланған мәтен ағылшын ілінде жазылды). Тура осылай
+                                            <Bold> "ALIIP"</Bold> сөзін <Bold>"dolls"</Bold> деп немесе
+                                            <Bold>"wheel"</Bold> деп шифрды шешуге болады; <Bold>"AFCCP" </Bold>сөзін
+                                            <Bold> "jolly"</Bold> немесе <Bold>"cheer"</Bold> деп бірнеше түрде шифрды шешуге болады.
                                         </Paragraph>
                                         <Paragraph FontSize="14">Бірнеше рет шифрлау табандылықты ешқалай жақсартпайды.Өйткені a және b жылжыту шифры a+b шифрына тең болып келеді.</Paragraph>
                                     </FlowDocument>
@@ -285,7 +289,7 @@
                         </TabItem>
 
                         <TabItem Header="Code" Style="{StaticResource secondaryTabStyle}">
-                            
+
                         </TabItem>
                     </TabControl>
                 </Grid>
@@ -345,7 +349,7 @@
                                                 <Label Grid.Column="1" Margin="10,36,0,0" Content="Кілт"
                                                        Height="26"
                                                        VerticalAlignment="Top" HorizontalAlignment="Left" />
-                                                <TextBox Grid.Column="2" 
+                                                <TextBox Grid.Column="2"
                                                          Margin="10,36,0,0"
                                                          Height="26" Width="100" VerticalAlignment="Top"
                                                          HorizontalAlignment="Left"
@@ -374,8 +378,7 @@
                                                      Style="{StaticResource StringKeyTextBox}"
                                                      Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
                                                      BorderBrush="{Binding BorderBrushPlainText}"
-                                                     Text="{Binding PlainText, UpdateSourceTrigger=PropertyChanged}"
-                                                     >
+                                                     Text="{Binding PlainText, UpdateSourceTrigger=PropertyChanged}">
 
                                             </TextBox>
 
@@ -409,11 +412,36 @@
                             <Grid>
                                 <FlowDocumentScrollViewer>
                                     <FlowDocument>
+                                        <Paragraph>
+                                            <Span Background="Wheat">
+                                                <Italic>Виженер шифры</Italic>
+                                            </Span>
+                                        </Paragraph>
+                                        <Paragraph FontSize="14">Виженер шифры — мәтінді сөздер арқылы берілген кілт көмегімен шифрлау әдісі. Бұл әдіс көпалфавиттік алмасу тәсілінің ең қарапайым түрі болып табылады. Виженер шифры бірнеше рет жаңартылған. Бірінші рет бұл криптография жүйесін 1553 жылы Джовани Баттиста Беллазо (итал. Giovan Battista Bellaso) La cifra del. Sig. Giovan Battista Bellasо кітабына енгізсе де, XIX ғасырда бұл әдіс француз дипломаты Блез Виженердің атына жазылған. Криптоанализдің кейбір түрлеріне ақиық болса да,бұл әдіс түсінуге әрі іске асыруға өте жеңіл.</Paragraph>
+                                        <Paragraph>
+                                            <Span Background="Wheat">
+                                                <Italic>Сипаттамасы</Italic>
+                                            </Span>
+                                        </Paragraph>
+                                        <Paragraph FontSize="14">Шифрлау және дешифрлауға арналған Виженер шаршысы, Виженер кестесі (tabula recta). Цезарь шифрында алфавиттің әрбір әрібі бір позициялық орынға жылжиды. Мысалға, Цезарь шифрында ауысым 3-ке тең болса A=D, B=E және т.б. Виженер шифры әртүрлі ауысымды Цезарь шифрынан тұрады. Шифрлау үшін Виженер шаршысын (кестесін) қолдануға болады. Латын алфавитіне сүйене отырып жасалған Виженер кестесі 26 таңбадан тұрады, сонымен қатар әрбір жол бірнеше позицияға жылжыған. Яғни бізде 26 әртүрлі Цезарь шифры пайда болады. Кілт сөздің таңбасына орай әрбір шифрлау кезеңіне әртүрлі алфавит қолданылады. Мысалға, ашық мәтін келесідей деп алайық:</Paragraph>
+                                        <Paragraph Foreground="Brown">ATTACKATDAWN</Paragraph>
+                                        <Paragraph FontSize="14">Хат жіберіп жатқан адам кілт сөздің (LEMON) ұзындығы мәтін ұзындығына тең болғанша циклді түрде қайталап жазады.</Paragraph>
+                                        <Paragraph Foreground="Brown">LEMONLEMONLE </Paragraph>
+                                        <Paragraph FontSize="14">Ашық мәтіннің бірінші таңбасы A-L кілтіне сәйкес келеді. Жабық мәтіннің бірінші таңбасы L, Виженер кестесіндегі L жолы мен A қатарының қиылысуында жатыр. Тура осындай жүйеде біз екінші әрібі, Е жолы мен Т қатарының қиылысуында жатыр. Ашық мәтіннің келесі бөлігі осылай шифрланады:</Paragraph>
+                                        <Paragraph Foreground="Brown">Ашық мәтін: ATTACKATDAWN </Paragraph>
+                                        <Paragraph Foreground="Brown">Кілт: LEMONLEMONLE</Paragraph>
+                                        <Paragraph Foreground="Brown">Шифрланған мәтін: LXFOPVEFRNHR </Paragraph>
+                                        <Paragraph FontSize="14"> Дешифрлау процесі келесідей жүреді: Кілт таңбаларына келетін жолды Виженер кестесінен табамыз. Жол бойынан жабық мәтінге тән бірінші таңбаны іздейміз. Бірінші таңба тұрған қатар, ашық мәтіннің бірінші әрібіне сәйкес келеді. Келесі әріптерді дешифрлау дәл осындай әдіспен жүреді.</Paragraph>
+                                        <Paragraph FontSize="14">Егерде <Italic>n</Italic> – алфавиттегі әріптер саны; <Italic>mj</Italic>-ашық мәтін әріптері;<Italic >kj</Italic> -кілт әріптері болса, Виженер әдісін келесідей формуламен беруге болса:</Paragraph>
+                                        <Paragraph FontSize="14" TextAlignment="Center"><Italic> cj=mj+kj (mod n)</Italic></Paragraph>
+                                        <Paragraph FontSize="14">Дешифрлау:</Paragraph>
+                                        <Paragraph FontSize="14" TextAlignment="Center"><Italic>mj=cj-kj (mod n)</Italic></Paragraph>
+                                        <Paragraph FontSize="14">Компьютерде бұндай операция ASCII кодтарын қосу операциясына сәйкес келеді. Дегенмен де, егер Виженер кестесі циклдік араласудан ғана тұрмаса, оның беріктігі артатындығына нық сенімдімін. Әріп қатар мен жолда бір рет қана кездесетіндей кесте жасау өте қиын. Оны тек электрондық компьютерлік құрылғыларда ғана байқап көрген жоқ. Күнделікті өмірде қолдануда Виженер кестесі ешқандай қиындық көрсетпейді. Ол тек шифрлау мен дешифрлауды жеңілдетеді.</Paragraph>
                                         <BlockUIContainer>
-                                            <ListView 
-                                                      ItemsSource="{Binding Vigenere.ShiftedAlphabet}"
-                                                      Focusable="False"
-                                                      HorizontalAlignment="Center">
+                                            <ListView
+                                                ItemsSource="{Binding Vigenere.ShiftedAlphabet}"
+                                                Focusable="False"
+                                                HorizontalAlignment="Center">
                                                 <ListView.ItemTemplate>
                                                     <DataTemplate>
                                                         <TextBlock Margin="0"
@@ -442,15 +470,7 @@
                      Style="{StaticResource mainTabStyle}">
 
             </TabItem>
-            <TabItem Header="AES" Foreground="#FFDADADA"
-                     Style="{StaticResource mainTabStyle}">
 
-            </TabItem>
-            <TabItem Header="ГОСТ" Foreground="#FFDADADA"
-                     Style="{StaticResource mainTabStyle}">
-
-            </TabItem>
-            
             <!-- RSA -->
             <TabItem Header="RSA" Foreground="#FFDADADA"
                      Style="{StaticResource mainTabStyle}"
@@ -460,8 +480,8 @@
                         <TabItem Header="Example" Style="{StaticResource secondaryTabStyle}">
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="2*" />
-                                    <RowDefinition Height="3*" />
+                                    <RowDefinition Height="280" />
+                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0" Background="#FFE5E5E5">
                                     <GroupBox Header="Инициализациялау" Margin="10,10,10,0" Foreground="Black">
@@ -484,16 +504,16 @@
                                                                  IsChecked="{Binding Path=EncryptionType, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=Decrypt}"
                                                                  Margin="10" />
                                                 </StackPanel>
-                                                
+
                                             </GroupBox>
                                             <GroupBox Grid.Column="1" Header="Жай сандар" Margin="6" Foreground="Black"
                                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                                                 <StackPanel Orientation="Vertical">
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                                        <Label  Margin="10,4,0,0" Content="Алфавит"
-                                                               Height="26" Width="70"
+                                                        <Label Margin="10,4,0,0" Content="Алфавит"
+                                                               Height="26" Width="80"
                                                                VerticalAlignment="Top" HorizontalAlignment="Left" />
-                                                        <ComboBox Margin="6" Width="184" Height="24"
+                                                        <ComboBox Margin="6" Width="174" Height="24"
                                                                   VerticalAlignment="Top" HorizontalAlignment="Stretch"
                                                                   SelectedItem="{Binding AlphabetPresenter}"
                                                                   SelectedIndex="0"
@@ -509,17 +529,17 @@
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
                                                                 HorizontalAlignment="Stretch">
                                                         <Label Content="P жай саны" Margin="10,4,0,0" Height="26"
-                                                               Width="70"
+                                                               Width="80"
                                                                VerticalAlignment="Top" HorizontalAlignment="Left" />
                                                         <TextBox
-                                                                 Margin="6" HorizontalAlignment="Stretch"
-                                                                 VerticalAlignment="Top"
-                                                                 Height="24" Width="184"
-                                                                 Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
-                                                                 Style="{StaticResource PrimeTextBox}"
-                                                                 >
+                                                            Margin="6" HorizontalAlignment="Stretch"
+                                                            VerticalAlignment="Top"
+                                                            Height="24" Width="174"
+                                                            Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                                                            Style="{StaticResource PrimeTextBox}">
                                                             <TextBox.Text>
-                                                                <Binding Path="Rsa.P" Converter="{StaticResource BigIntegerToStringConverter}">
+                                                                <Binding Path="Rsa.P"
+                                                                         Converter="{StaticResource BigIntegerToStringConverter}">
                                                                     <Binding.ValidationRules>
                                                                         <validations:PrimalityValidation />
                                                                     </Binding.ValidationRules>
@@ -530,31 +550,30 @@
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
                                                                 HorizontalAlignment="Stretch">
                                                         <Label Content="Q жай саны" Margin="10,4,0,0" Height="26"
-                                                               Width="70"
+                                                               Width="80"
                                                                VerticalAlignment="Top" HorizontalAlignment="Left" />
                                                         <TextBox
                                                             Margin="6" HorizontalAlignment="Stretch"
                                                             VerticalAlignment="Top"
-                                                            Height="24" Width="184"
+                                                            Height="24" Width="174"
                                                             Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
-                                                            Style="{StaticResource PrimeTextBox}"
-                                                        >
+                                                            Style="{StaticResource PrimeTextBox}">
                                                             <TextBox.Text>
-                                                                <Binding Path="Rsa.Q" Converter="{StaticResource BigIntegerToStringConverter}">
+                                                                <Binding Path="Rsa.Q"
+                                                                         Converter="{StaticResource BigIntegerToStringConverter}">
                                                                     <Binding.ValidationRules>
                                                                         <validations:PrimalityValidation />
                                                                     </Binding.ValidationRules>
                                                                 </Binding>
                                                             </TextBox.Text>
-                                                        </TextBox> 
+                                                        </TextBox>
                                                     </StackPanel>
                                                     <StackPanel>
                                                         <Button VerticalAlignment="Center"
                                                                 HorizontalAlignment="Stretch"
                                                                 Height="24"
                                                                 Margin="6"
-                                                                Command="{Binding GeneratePrimesCommand}"
-                                                                >
+                                                                Command="{Binding GeneratePrimesCommand}">
                                                             Генерациялау
                                                         </Button>
                                                     </StackPanel>
@@ -568,12 +587,12 @@
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
                                                                 HorizontalAlignment="Stretch">
                                                         <Label Content="N модулі" Margin="10,4,0,0" Height="26"
-                                                               Width="110"
+                                                               Width="120"
                                                                VerticalAlignment="Top" HorizontalAlignment="Left" />
                                                         <TextBox Text="{Binding Rsa.N, Mode=OneWay}"
-                                                            Margin="6" HorizontalAlignment="Stretch"
+                                                                 Margin="6" HorizontalAlignment="Stretch"
                                                                  VerticalAlignment="Top"
-                                                                 Height="24" Width="184"
+                                                                 Height="24" Width="174"
                                                                  IsReadOnly="True"
                                                                  Background="#FFE5E5E5" />
                                                     </StackPanel>
@@ -581,40 +600,46 @@
                                                                 HorizontalAlignment="Stretch">
                                                         <Label Content="phi(N)=(p-1)(q-1)" Margin="10,4,0,0"
                                                                Height="26"
-                                                               Width="110"
+                                                               Width="120"
                                                                VerticalAlignment="Top" HorizontalAlignment="Left" />
                                                         <TextBox Text="{Binding Rsa.Totient, Mode=OneWay}"
                                                                  Margin="6" HorizontalAlignment="Stretch"
                                                                  VerticalAlignment="Top"
-                                                                 Height="24" Width="184"
+                                                                 Height="24" Width="174"
                                                                  IsReadOnly="True"
                                                                  Background="#FFE5E5E5" />
                                                     </StackPanel>
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
                                                                 HorizontalAlignment="Stretch">
                                                         <Label Content="Ашық кілт e" Margin="10,4,0,0" Height="26"
-                                                               Width="110"
+                                                               Width="120"
                                                                VerticalAlignment="Top" HorizontalAlignment="Left" />
                                                         <TextBox Text="{Binding Rsa.E, Mode=OneWay}"
                                                                  Margin="6" HorizontalAlignment="Stretch"
                                                                  VerticalAlignment="Top"
                                                                  IsReadOnly="True"
-                                                                 Height="24" Width="184" 
+                                                                 Height="24" Width="174"
                                                                  Background="#FFE5E5E5" />
                                                     </StackPanel>
                                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center"
                                                                 HorizontalAlignment="Stretch">
                                                         <Label Content="Жабық кілт d" Margin="10,4,0,0" Height="26"
-                                                               Width="110"
+                                                               Width="120"
                                                                VerticalAlignment="Top" HorizontalAlignment="Left" />
                                                         <TextBox Text="{Binding Rsa.D, Mode=OneWay}"
                                                                  Margin="6" HorizontalAlignment="Stretch"
                                                                  VerticalAlignment="Top"
-                                                                 Height="24" Width="184"
+                                                                 Height="24" Width="174"
                                                                  IsReadOnly="True"
                                                                  Background="#FFE5E5E5" />
                                                     </StackPanel>
-                                                    <Button Width="120" HorizontalAlignment="Center" Command="{Binding CalculateKeysCommand}">Кілттерді есептеу</Button>
+                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                        <Button HorizontalAlignment="Stretch" Height="24" Width="304"
+                                                                VerticalAlignment="Center" Margin="6"
+                                                                Command="{Binding CalculateKeysCommand}">
+                                                            Кілттерді есептеу
+                                                        </Button>
+                                                    </StackPanel>
                                                 </StackPanel>
                                             </GroupBox>
                                         </Grid>
@@ -626,21 +651,22 @@
                                             <Label Content="Кіріс мәтін" Margin="6,6,0,0" Height="26"
                                                    VerticalAlignment="Top" HorizontalAlignment="Left" />
                                             <TextBox Text="{Binding PlainText, UpdateSourceTrigger = PropertyChanged}"
-                                                     Margin="6,0" 
+                                                     Margin="6,0"
                                                      HorizontalAlignment="Stretch"
                                                      VerticalAlignment="Top"
-                                                     Height="24" 
-                                            />
+                                                     Height="24" />
                                             <Label Content="Кіріс мәтін" Margin="6,6,0,0" Height="26"
                                                    VerticalAlignment="Top" HorizontalAlignment="Left" />
-                                            <TextBox Text="{Binding PlainTextNumberRepresentation, Converter={StaticResource SpacedCapitalConverter}}"
-                                                     Margin="6,0" HorizontalAlignment="Stretch"
-                                                     VerticalAlignment="Top"
-                                                     Height="24"
-                                                     IsReadOnly="True"
-                                                     Background="#FFE5E5E5" />
+                                            <TextBox
+                                                Text="{Binding PlainTextNumberRepresentation, Converter={StaticResource SpacedCapitalConverter}}"
+                                                Margin="6,0" HorizontalAlignment="Stretch"
+                                                VerticalAlignment="Top"
+                                                Height="24"
+                                                IsReadOnly="True"
+                                                Background="#FFE5E5E5" />
                                             <Label Content="Кіріс мәтін" Margin="6,6,0,0" Height="26"
                                                    VerticalAlignment="Top" HorizontalAlignment="Left" />
+
                                             <TextBox Text="{Binding CipherTextNumberRepresentation, Converter={StaticResource SpacedCapitalConverter}}"
                                                      Margin="6,0" HorizontalAlignment="Stretch"
                                                      VerticalAlignment="Top"
@@ -668,8 +694,7 @@
                                                         Command="{Binding SwapTextCommand}">
                                                     <Image Source="/Views/UpArrow.png" />
                                                 </Button>
-                                            </StackPanel>
-                                            
+                                            </StackPanel>                                
                                         </StackPanel>
                                     </GroupBox>
                                 </Grid>
@@ -677,7 +702,7 @@
                         </TabItem>
 
                         <TabItem Header="Description" Style="{StaticResource secondaryTabStyle}">
-
+                            
                         </TabItem>
 
                         <TabItem Header="Code" Style="{StaticResource secondaryTabStyle}">
