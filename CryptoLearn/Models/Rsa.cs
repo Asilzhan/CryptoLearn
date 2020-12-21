@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Numerics;
 using System.Resources;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 using CryptoLearn.Annotations;
 using CryptoLearn.Interfaces;
@@ -16,10 +18,10 @@ namespace CryptoLearn.Models
 	{
 		#region Private members
 
-		private BigInteger _e;
-		private BigInteger _d;
-		private BigInteger _p;
-		private BigInteger _q;
+		private ulong _e;
+		private ulong _d;
+		private ulong _p;
+		private ulong _q;
 
 		#endregion
 
@@ -27,21 +29,21 @@ namespace CryptoLearn.Models
 		{
 			P = 13;
 			Q = 97;
-			
-			string text = "AsilzhanАлмат1234567890Қ";
-			var t1 = StringToULongArray(text);
-			var t2 = Encrypt(t1);
-			var t3 = Decrypt(t2);
-			var t4 = ULongArrayToString(t1);
-			Debug.Assert(text.Equals(t4));
+			GeneratePrimes();
+			CalculateDAndE();
+			// string text = "AsilzhanАлмат1234567890Қ";
+			// var t1 = StringToArray(text);
+			// var t2 = Encrypt(t1);
+			// var t3 = Decrypt(t2);
+			// var t4 = ArrayToString(t3);
+			// Debug.Assert(text.Equals(t4));
+			//
+			// Debug.WriteLine(Encoding.Unicode.GetByteCount(text));
 		}
 		
 		#region Properties
 
-		public string Alphabet =>
-			"abcdefghijklmnopqrstuvwxyz,.?!;:\"()'+-*/~@#$%^&-=_0123456789 №<>аәбвгғдеёжзийкқлмнңоөпрстуұүфхһцчшщъыіьэюя[\\]{|}─│┌┐└┘├┤┬┴┼═║╒‰₸";
-
-		public BigInteger P
+		public ulong P
 		{
 			get => _p;
 			set
@@ -53,7 +55,7 @@ namespace CryptoLearn.Models
 				OnPropertyChanged(nameof(N));
 			}
 		}
-		public BigInteger Q
+		public ulong Q
 		{
 			get => _q;
 			set
@@ -65,7 +67,7 @@ namespace CryptoLearn.Models
 				OnPropertyChanged(nameof(N));
 			}
 		}
-		public BigInteger E
+		public ulong E
 		{
 			get => _e;
 			set
@@ -75,7 +77,7 @@ namespace CryptoLearn.Models
 				OnPropertyChanged();
 			}
 		}
-		public BigInteger D
+		public ulong D
 		{
 			get => _d;
 			set
@@ -85,9 +87,9 @@ namespace CryptoLearn.Models
 				OnPropertyChanged();
 			}
 		}
-		public BigInteger Totient => (P - 1) * (Q - 1);
+		public ulong Totient => (P - 1) * (Q - 1);
 
-		public BigInteger N => P * Q;
+		public ulong N => P * Q;
 
 		#endregion
 
@@ -115,31 +117,18 @@ namespace CryptoLearn.Models
 			return res;
 		}
 
-		public ulong[] StringToULongArray(string s, Encoding encoding = null)
+		public ulong[] StringToArray(string s, Encoding encoding = null)
 		{
-			Span<byte> t = (encoding ?? Encoding.Unicode).GetBytes(s);
-			ulong[] res = new ulong[t.Length / 8];
-			for (int i = 0; i < res.Length; i++)
-			{
-				res[i] = BitConverter.ToUInt64(t.Slice(8 * i, 8));
-			}
-
-			return res;
+			Span<byte> bytes = (encoding ?? Encoding.Unicode).GetBytes(s.PadRight((s.Length / 4 + 1) * 4));
+			
+			Span<ulong> ulongs = MemoryMarshal.Cast<byte, ulong>(bytes);
+			return ulongs.ToArray();
 		}
 		
-		public string ULongArrayToString(ulong[] b, Encoding encoding = null)
+		public string ArrayToString(ulong[] b, Encoding encoding = null)
 		{
-			byte[] t = new byte[b.Length * 8];
-			for (int i = 0; i < b.Length; i++)
-			{
-				var bytes = BitConverter.GetBytes(b[i]);
-				for (int j = 0; j < 8; j++)
-				{
-					t[8 * i + j] = bytes[j];
-				}
-			}
-
-			return (encoding ?? Encoding.Unicode).GetString(t);
+			Span<byte> bytes = MemoryMarshal.Cast<ulong, byte>(b);
+			return (encoding ?? Encoding.Unicode).GetString(bytes).TrimEnd();
 		}
 		
 		public void GeneratePrimes()
@@ -159,10 +148,13 @@ namespace CryptoLearn.Models
 			
 		}
 
-		private BigInteger GeneratePrime()
+		private ulong GeneratePrime()
 		{
-			return PrimeHelper.Tools.PrimaryBigInteger
+			var bigInteger = PrimeHelper.Tools.PrimaryBigInteger
 				.GenerateProbablyPrime(32).Result;
+			var ul = (ulong) bigInteger;
+			Debug.Assert(ul == bigInteger);
+			return ul;
 		}
 		public void CalculateDAndE()
 		{
@@ -175,10 +167,10 @@ namespace CryptoLearn.Models
 			PrimeHelper.Helpers.BigIntegerHelpers.GcdEx(e, Totient, ref x, ref y);
 			x = (x % Totient + Totient) % Totient;
 
-			E = e;
-			D = x;
+			E = (ulong) e;
+			D = (ulong) x;
 
-			BigInteger.DivRem(E * D, Totient, out var t);
+			BigInteger.DivRem(((BigInteger)E) * ((BigInteger)D), Totient, out var t);
 			BigInteger.DivRem(t + Totient, Totient, out var rem);
 			Debug.Assert(rem == 1);
 		}

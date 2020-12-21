@@ -12,8 +12,4 @@ namespace CryptoLearn.Helper
 			return from;
 		}
 	}
-	public static class ArrayExtensions
-	{
-
-	}
 }
