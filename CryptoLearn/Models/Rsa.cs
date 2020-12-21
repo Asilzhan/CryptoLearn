@@ -29,16 +29,8 @@ namespace CryptoLearn.Models
 		{
 			P = 13;
 			Q = 97;
-			GeneratePrimes();
-			CalculateDAndE();
-			// string text = "AsilzhanАлмат1234567890Қ";
-			// var t1 = StringToArray(text);
-			// var t2 = Encrypt(t1);
-			// var t3 = Decrypt(t2);
-			// var t4 = ArrayToString(t3);
-			// Debug.Assert(text.Equals(t4));
-			//
-			// Debug.WriteLine(Encoding.Unicode.GetByteCount(text));
+			// GeneratePrimes();
+			// CalculateDAndE();
 		}
 		
 		#region Properties

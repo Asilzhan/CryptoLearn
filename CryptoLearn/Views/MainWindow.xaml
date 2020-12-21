@@ -538,8 +538,7 @@
                                                             Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
                                                             Style="{StaticResource PrimeTextBox}">
                                                             <TextBox.Text>
-                                                                <Binding Path="Rsa.P"
-                                                                         Converter="{StaticResource BigIntegerToStringConverter}">
+                                                                <Binding Path="Rsa.P">
                                                                     <Binding.ValidationRules>
                                                                         <validations:PrimalityValidation />
                                                                     </Binding.ValidationRules>
@@ -559,8 +558,7 @@
                                                             Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
                                                             Style="{StaticResource PrimeTextBox}">
                                                             <TextBox.Text>
-                                                                <Binding Path="Rsa.Q"
-                                                                         Converter="{StaticResource BigIntegerToStringConverter}">
+                                                                <Binding Path="Rsa.Q">
                                                                     <Binding.ValidationRules>
                                                                         <validations:PrimalityValidation />
                                                                     </Binding.ValidationRules>

@@ -184,8 +184,17 @@ namespace CryptoLearn.ViewModels
             }, o => !string.IsNullOrEmpty(PlainText));
             SwapTextCommand = new RelayCommand(o =>
             {
-                PlainText = CipherText;
+                if (!string.IsNullOrEmpty(CipherText))
+                {
+                    PlainText = CipherText;
+                } else
+                {
+                    PlainText = string.Join('#', CipherTextNumberRepresentation);
+                }
+                PlainTextNumberRepresentation = null;
+
                 CipherText = "";
+                CipherTextNumberRepresentation = null;
             });
             Test1();
             Test2();
