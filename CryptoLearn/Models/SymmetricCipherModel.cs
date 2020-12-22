@@ -12,9 +12,7 @@ namespace CryptoLearn.Models
 	public class SymmetricCipherModel : INotifyPropertyChanged
 	{
 		#region Private members
-
-		private string _inputFilePath;
-		private string _outputFilePath;
+		
 		private string _key;
 
 		#endregion
@@ -28,28 +26,6 @@ namespace CryptoLearn.Models
 		#endregion
 		
 		#region Properties
-
-		public string InputFilePath
-		{
-			get => _inputFilePath;
-			set
-			{
-				if (value == _inputFilePath) return;
-				_inputFilePath = value;
-				OnPropertyChanged();
-			}
-		}
-
-		public string OutputFilePath
-		{
-			get => _outputFilePath;
-			set
-			{
-				if (value == _outputFilePath) return;
-				_outputFilePath = value;
-				OnPropertyChanged();
-			}
-		}
 
 		public string Key
 		{
@@ -104,10 +80,10 @@ namespace CryptoLearn.Models
 
 			return Encoding.GetString(buff);
 		}
-		public async void Encrypt()
+		public async void Encrypt(string inputPath, string outputPath)
 		{
-			FileStream fin = new FileStream(InputFilePath, FileMode.Open, FileAccess.Read);
-			FileStream fout = new FileStream(OutputFilePath, FileMode.OpenOrCreate, FileAccess.Write);
+			FileStream fin = new FileStream(inputPath, FileMode.Open, FileAccess.Read);
+			FileStream fout = new FileStream(outputPath, FileMode.OpenOrCreate, FileAccess.Write);
 			
 			fout.SetLength(0);
 			CryptoStream cryptoStream = new CryptoStream(fout, Algorithm.CreateEncryptor(), CryptoStreamMode.Write);
@@ -119,10 +95,10 @@ namespace CryptoLearn.Models
 			}
 		}
 
-		public async void Decrypt()
+		public async void Decrypt(string inputPath, string outputPath)
 		{
-			FileStream fin = new FileStream(InputFilePath, FileMode.Open, FileAccess.Read);
-			FileStream fout = new FileStream(OutputFilePath, FileMode.OpenOrCreate, FileAccess.Write);
+			FileStream fin = new FileStream(inputPath, FileMode.Open, FileAccess.Read);
+			FileStream fout = new FileStream(outputPath, FileMode.OpenOrCreate, FileAccess.Write);
 			fout.SetLength(0);
 			CryptoStream cryptoStream = new CryptoStream(fout, Algorithm.CreateDecryptor(), CryptoStreamMode.Write);
 			
