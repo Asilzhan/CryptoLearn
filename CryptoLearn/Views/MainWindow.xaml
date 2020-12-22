@@ -475,7 +475,7 @@
 
             <!-- DES -->
             <TabItem Header="DES" Foreground="#FFDADADA"
-                     DataContext="{Binding CeaserViewModel}"
+                     DataContext="{Binding DesViewModel}"
                      Style="{StaticResource mainTabStyle}">
                 <Grid>
                     <TabControl TabStripPlacement="Bottom" Background="#FFE5E5E5">
@@ -491,8 +491,7 @@
                                               VerticalAlignment="Stretch">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="1*" />
-                                                <ColumnDefinition Width="1*" />
-                                                <ColumnDefinition Width="3*" />
+                                                <ColumnDefinition Width="4*" />
                                             </Grid.ColumnDefinitions>
                                             <GroupBox Header="Түрі" Foreground="Black" Margin="6"
                                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -507,31 +506,171 @@
                                                                  Margin="10" />
                                                 </StackPanel>
                                             </GroupBox>
-                                            <GroupBox Grid.Column="1" Header="Ақпарат" Margin="6"
-                                                      Foreground="Black"
-                                                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                                <StackPanel Orientation="Vertical">
-                                                    <RadioButton Content="Файлдан оқу" 
-                                                                 Margin="10"
-                                                                 GroupName="DataSourceType"
-                                                                 IsChecked="{Binding Path=DataSourceType, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=FromFile}" />
-                                                    <RadioButton Content="Мәтін арқылы" 
-                                                                 Margin="10"
-                                                                 GroupName="DataSourceType"
-                                                                 IsChecked="{Binding Path=DataSourceType, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=FromString}" />
-                                                </StackPanel>
-                                            </GroupBox>
-                                            <GroupBox Grid.Column="2" Header="Параметрi" Margin="6"
+                                            <GroupBox Grid.Column="1" Header="Параметрi" Margin="6"
                                                       Foreground="Black" VerticalAlignment="Stretch"
                                                       HorizontalAlignment="Stretch">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Label Content="Кілт" Margin="10,4,0,0" Height="26"
-                                                           Width="50"
-                                                           VerticalAlignment="Top" HorizontalAlignment="Left" />
-                                                    <TextBox Text=""
-                                                        Margin="6" HorizontalAlignment="Stretch"
-                                                        VerticalAlignment="Top"
-                                                        Height="24" Width="300"/>
+                                                <StackPanel Orientation="Vertical">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Label Content="Кілт" Margin="10,4,0,0" Height="26"
+                                                               Width="50"
+                                                               VerticalAlignment="Top" HorizontalAlignment="Left" />
+                                                        <TextBox Text="{Binding SymmetricCipher.Key}"
+                                                                 Margin="6" 
+                                                                 HorizontalAlignment="Right"
+                                                                 VerticalAlignment="Top"
+                                                                 Height="24"
+                                                                 Width="520"
+                                                                 />
+                                                    </StackPanel>
+                                                    <Button Command="{Binding GenerateKeyCommand}"
+                                                            Content="Генерациялау"
+                                                            Width="120"
+                                                            HorizontalAlignment="Right"
+                                                            Margin="6"
+                                                    />                                                
+                                                </StackPanel>
+
+                                            </GroupBox>
+                                        </Grid>
+                                    </GroupBox>
+                                </Grid>
+                                <Grid Grid.Row="1" Background="#FFE5E5E5">
+                                    <GroupBox Header="Шифрлау" Margin="10" Foreground="Black">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="540" />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel>
+                                                <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
+                                                    <StackPanel Orientation="Vertical">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBox Text="{Binding InputFilePath}"
+                                                                     Margin="6" HorizontalAlignment="Stretch"
+                                                                     VerticalAlignment="Top"
+                                                                     Height="24" Width="400" />
+                                                            <Button VerticalAlignment="Center"
+                                                                    HorizontalAlignment="Stretch"
+                                                                    Height="24"
+                                                                    Width="120"
+                                                                    Margin="6"
+                                                                    Command="{Binding OpenFileCommand}">
+                                                                Файлды ашу...
+                                                            </Button>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                    <StackPanel Orientation="Vertical">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBox Text="{Binding OutputFilePath}"
+                                                                     Margin="6" HorizontalAlignment="Stretch"
+                                                                     VerticalAlignment="Top"
+                                                                     Height="24" Width="400" />
+                                                            <Button VerticalAlignment="Center"
+                                                                    HorizontalAlignment="Stretch"
+                                                                    Height="24"
+                                                                    Width="120"
+                                                                    Margin="6"
+                                                                    Command="{Binding SaveFileCommand}">
+                                                                Файлды ашу...
+                                                            </Button>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                                <StackPanel HorizontalAlignment="Right"
+                                                            Orientation="Horizontal">
+                                                    <Button Margin="6,6,6,6"
+                                                            HorizontalAlignment="Stretch"
+                                                            Height="24"
+                                                            Width="120"
+                                                            Command="{Binding SwapTextCommand}">
+                                                        <Image Source="/Views/leftArrow.png" />
+                                                    </Button>
+                                                    <Button Margin="6,6,2,6"
+                                                            HorizontalAlignment="Stretch"
+                                                            Content="{Binding EncryptionType}"
+                                                            Height="24"
+                                                            Width="120"
+                                                            Command="{Binding EncryptCommand}" />
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Grid>
+                                    </GroupBox>
+                                </Grid>
+
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Description" Style="{StaticResource secondaryTabStyle}">
+                            <Grid>
+                                <FlowDocumentScrollViewer>
+                                    <FlowDocument>
+
+                                    </FlowDocument>
+                                </FlowDocumentScrollViewer>
+                            </Grid>
+                        </TabItem>
+
+                        <TabItem Header="Code" Style="{StaticResource secondaryTabStyle}">
+
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+
+            <!-- AES -->
+            <TabItem Header="AES" Foreground="#FFDADADA"
+                     DataContext="{Binding AesViewModel}"
+                     Style="{StaticResource mainTabStyle}">
+                <Grid>
+                    <TabControl TabStripPlacement="Bottom" Background="#FFE5E5E5">
+                        <TabItem Header="Example" Style="{StaticResource secondaryTabStyle}">
+                            <Grid Background="#FFE5E5E5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="3*" />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Background="#FFE5E5E5">
+                                    <GroupBox Header="Инициализациялау" Margin="10,10,10,0" Foreground="Black">
+                                        <Grid Background="#FFE5E5E5" HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Stretch">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="4*" />
+                                            </Grid.ColumnDefinitions>
+                                            <GroupBox Header="Түрі" Foreground="Black" Margin="6"
+                                                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                                <StackPanel Orientation="Vertical">
+                                                    <RadioButton Content="Шифрлау"
+                                                                 GroupName="EncryptType"
+                                                                 IsChecked="{Binding Path=EncryptionType, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=Encrypt}"
+                                                                 Margin="10" />
+                                                    <RadioButton Content="Дешифрлау"
+                                                                 GroupName="EncryptType"
+                                                                 IsChecked="{Binding Path=EncryptionType, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=Decrypt}"
+                                                                 Margin="10" />
+                                                </StackPanel>
+                                            </GroupBox>
+                                            <GroupBox Grid.Column="1" Header="Параметрi" Margin="6"
+                                                      Foreground="Black" VerticalAlignment="Stretch"
+                                                      HorizontalAlignment="Stretch">
+                                                <StackPanel Orientation="Vertical">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Label Content="Кілт" Margin="10,4,0,0" Height="26"
+                                                               Width="50"
+                                                               VerticalAlignment="Top" HorizontalAlignment="Left" />
+                                                        <TextBox Text="{Binding SymmetricCipher.Key}"
+                                                                 Margin="6" 
+                                                                 HorizontalAlignment="Right"
+                                                                 VerticalAlignment="Top"
+                                                                 Height="24"
+                                                                 Width="520"
+                                                        />
+                                                    </StackPanel>
+                                                    <Button Command="{Binding GenerateKeyCommand}"
+                                                            Content="Генерациялау"
+                                                            Width="120"
+                                                            HorizontalAlignment="Right"
+                                                            Margin="6"
+                                                            />
                                                 </StackPanel>
                                             </GroupBox>
                                         </Grid>
@@ -541,72 +680,61 @@
                                     <GroupBox Header="Шифрлау" Margin="10" Foreground="Black">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="100" />
-                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="540" />
+                                                <ColumnDefinition />
                                             </Grid.ColumnDefinitions>
-                                            <GroupBox Header="Кіріс мәліметі" Margin="10" Foreground="Black">
-                                                <StackPanel  Orientation="Vertical">
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <TextBox Text=""
-                                                            Margin="6" HorizontalAlignment="Stretch"
-                                                            VerticalAlignment="Top"
-                                                            Height="24" Width="200"/>
-                                                        <Button VerticalAlignment="Center"
-                                                                HorizontalAlignment="Stretch"
-                                                                Height="24"
-                                                                Margin="6">
-                                                            Файлды ашу...
-                                                        </Button>
+                                            <StackPanel>
+                                                <StackPanel Orientation="Vertical" HorizontalAlignment="Right">
+                                                    <StackPanel Orientation="Vertical">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBox Text="{Binding InputFilePath}"
+                                                                     Margin="6" HorizontalAlignment="Stretch"
+                                                                     VerticalAlignment="Top"
+                                                                     Height="24" Width="400" />
+                                                            <Button VerticalAlignment="Center"
+                                                                    HorizontalAlignment="Stretch"
+                                                                    Height="24"
+                                                                    Width="120"
+                                                                    Margin="6"
+                                                                    Command="{Binding OpenFileCommand}">
+                                                                Файлды ашу...
+                                                            </Button>
+                                                        </StackPanel>
                                                     </StackPanel>
-                                                    <TextBox Text="{Binding PlainText}"
-                                                             Margin="6" HorizontalAlignment="Stretch"
-                                                             VerticalAlignment="Stretch"
-                                                             Height="300"
-                                                             Style="{StaticResource placeHolder}" Tag="Input">
-                                                    </TextBox>
+                                                    <StackPanel Orientation="Vertical">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBox Text="{Binding OutputFilePath}"
+                                                                     Margin="6" HorizontalAlignment="Stretch"
+                                                                     VerticalAlignment="Top"
+                                                                     Height="24" Width="400" />
+                                                            <Button VerticalAlignment="Center"
+                                                                    HorizontalAlignment="Stretch"
+                                                                    Height="24"
+                                                                    Width="120"
+                                                                    Margin="6"
+                                                                    Command="{Binding SaveFileCommand}">
+                                                                Файлды ашу...
+                                                            </Button>
+                                                        </StackPanel>
+                                                    </StackPanel>
                                                 </StackPanel>
-                                            </GroupBox>
-                                            
-                                            <StackPanel Grid.Column="1" VerticalAlignment="Center"
-                                                        HorizontalAlignment="Center">
-                                                <Button Margin="2,6"
-                                                        HorizontalAlignment="Stretch"
-                                                        Height="24"
-                                                        Width="92"
-                                                        Command="{Binding SwapTextCommand}">
-                                                    <Image Source="/Views/leftArrow.png" />
-                                                </Button>
-                                                <Button Margin="2,6"
-                                                        HorizontalAlignment="Stretch"
-                                                        Content="{Binding EncryptionType}"
-                                                        Height="24"
-                                                        Width="92"
-                                                        Command="{Binding EncryptCommand}" />
+                                                <StackPanel HorizontalAlignment="Right"
+                                                            Orientation="Horizontal">
+                                                    <Button Margin="6,6,6,6"
+                                                            HorizontalAlignment="Stretch"
+                                                            Height="24"
+                                                            Width="120"
+                                                            Command="{Binding SwapTextCommand}">
+                                                        <Image Source="/Views/leftArrow.png" />
+                                                    </Button>
+                                                    <Button Margin="6,6,2,6"
+                                                            HorizontalAlignment="Stretch"
+                                                            Content="{Binding EncryptionType}"
+                                                            Height="24"
+                                                            Width="120"
+                                                            Command="{Binding EncryptCommand}" />
+                                                </StackPanel>
                                             </StackPanel>
-
-                                            <GroupBox Grid.Column="2" Header="Шығыс мәліметі" Margin="10" Foreground="Black">
-                                                <StackPanel  Orientation="Vertical">
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <TextBox Text=""
-                                                                 Margin="6" HorizontalAlignment="Stretch"
-                                                                 VerticalAlignment="Top"
-                                                                 Height="24" Width="200"/>
-                                                        <Button VerticalAlignment="Center"
-                                                                HorizontalAlignment="Stretch"
-                                                                Height="24"
-                                                                Margin="6">
-                                                            Файлды ашу...
-                                                        </Button>
-                                                    </StackPanel>
-                                                    <TextBox Text="{Binding CipherText}"
-                                                             Margin="6" HorizontalAlignment="Stretch"
-                                                             VerticalAlignment="Stretch" IsReadOnly="True"
-                                                             Height="300"
-                                                             Style="{StaticResource placeHolder}" Tag="Output">
-                                                    </TextBox>
-                                                </StackPanel>
-                                            </GroupBox>
                                         </Grid>
                                     </GroupBox>
                                 </Grid>

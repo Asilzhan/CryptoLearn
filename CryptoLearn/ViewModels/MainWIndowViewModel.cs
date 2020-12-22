@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using CryptoLearn.Annotations;
+using CryptoLearn.Helper;
 using CryptoLearn.Interfaces;
+using CryptoLearn.Models;
 
 namespace CryptoLearn.ViewModels
 {
@@ -10,6 +13,8 @@ namespace CryptoLearn.ViewModels
     {
         public CeaserViewModel CeaserViewModel { get; set; }
         public VigenereViewModel VigenereViewModel { get; set; }
+        public CipherViewModel DesViewModel { get; set; }
+        public CipherViewModel AesViewModel { get; set; }
 
         public RsaViewModel RsaViewModel { get; set; }
         
@@ -18,6 +23,9 @@ namespace CryptoLearn.ViewModels
             CeaserViewModel = new CeaserViewModel();
             VigenereViewModel = new VigenereViewModel();
             RsaViewModel = new RsaViewModel();
+            DesViewModel = new CipherViewModel(new SymmetricCipherModel(){Algorithm = new DESCryptoServiceProvider()}, new FileDialog());
+            AesViewModel = new CipherViewModel(new SymmetricCipherModel(){Algorithm = new AesCryptoServiceProvider()}, new FileDialog());
+
         }
 
         #region INotifyPropertyChanged

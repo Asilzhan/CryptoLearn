@@ -1,8 +1,10 @@
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using CryptoLearn.Annotations;
 using CryptoLearn.Helper;
+using CryptoLearn.Interfaces;
 using CryptoLearn.Models;
 using Microsoft.Xaml.Behaviors.Core;
 
@@ -18,20 +20,30 @@ namespace CryptoLearn.ViewModels
 		private string _plainText;
 		private string _cipherText;
 		private EncryptionType _encryptionType;
+		private string _key;
 
 		#endregion
 
 		#region Constructor
 
-		public CipherViewModel(SymmetricCipherModel symmetricCipher)
+		public CipherViewModel(SymmetricCipherModel symmetricCipher, IOService service)
 		{
+			FileService = service;
 			SymmetricCipher = symmetricCipher;
 			EncryptCommand = new RelayCommand(o =>
 			{
 				Encrypt();
 			}, o => (DataSourceType == DataSourceType.FromFile && !string.IsNullOrEmpty(InputFilePath) &&
 			         !string.IsNullOrEmpty(OutputFilePath))
-			        || DataSourceType == DataSourceType.FromString && string.IsNullOrEmpty(PlainText));
+			        || DataSourceType == DataSourceType.FromString && !string.IsNullOrEmpty(PlainText));
+			SwapTextCommand = new RelayCommand(o =>
+			{
+				InputFilePath = OutputFilePath;
+				OutputFilePath = "";
+			});
+			OpenFileCommand = new RelayCommand(o=>OpenFile());
+			SaveFileCommand = new RelayCommand(o=>SaveFile());
+			GenerateKeyCommand = new RelayCommand(o=>SymmetricCipher.Algorithm.GenerateKey());
 		}
 
 		#endregion
@@ -106,11 +118,21 @@ namespace CryptoLearn.ViewModels
 			}
 		}
 
+		public IOService FileService { get; set; }
+		
 		#endregion
 
 		#region Commands
 
 		public ICommand EncryptCommand { get; set; }
+
+		public ICommand SaveFileCommand { get; set; }
+		public ICommand OpenFileCommand { get; set; }
+
+		public ICommand SwapTextCommand { get; set; }
+
+		public ICommand GenerateKeyCommand { get; set; }
+
 
 		#endregion
 
@@ -126,16 +148,23 @@ namespace CryptoLearn.ViewModels
 			{
 				SymmetricCipher.Decrypt(_inputFilePath, _outputFilePath);
 			}
-			else if (DataSourceType == DataSourceType.FromString && EncryptionType == EncryptionType.Encrypt)
-			{
-				CipherText = SymmetricCipher.Encrypt(PlainText).Result;
-			}
-			else if (DataSourceType == DataSourceType.FromString && EncryptionType == EncryptionType.Decrypt)
-			{
-				CipherText = SymmetricCipher.Decrypt(PlainText).Result;
-			}		
+			// else if (DataSourceType == DataSourceType.FromString && EncryptionType == EncryptionType.Encrypt)
+			// {
+			// 	CipherText = SymmetricCipher.Encrypt(PlainText);
+			// }
+			// else if (DataSourceType == DataSourceType.FromString && EncryptionType == EncryptionType.Decrypt)
+			// {
+			// 	CipherText = SymmetricCipher.Decrypt(PlainText);
+			// }		
 		}
-
+		private void OpenFile()
+		{
+			InputFilePath = FileService.OpenFileDialog(Environment.GetFolderPath(Environment.SpecialFolder.Desktop)) ?? string.Empty;
+		}
+		private void SaveFile()
+		{
+			OutputFilePath = FileService.SaveFileDialog(Environment.GetFolderPath(Environment.SpecialFolder.Desktop)) ?? string.Empty;
+		}
 		#endregion
 		
 		#region INotifyPropertyChanged
