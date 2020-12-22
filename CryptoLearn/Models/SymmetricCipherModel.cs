@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
@@ -14,6 +15,7 @@ namespace CryptoLearn.Models
 		#region Private members
 
 		private string _key;
+		private string _iv;
 
 		#endregion
 
@@ -39,48 +41,24 @@ namespace CryptoLearn.Models
 			}
 		}
 
+		public string Iv
+		{
+			get => _iv;
+			set
+			{
+				if (value == _iv) return;
+				_iv = value;
+				Algorithm.IV = StringToBytes(value);
+				OnPropertyChanged();
+			}
+		}
+
 		public SymmetricAlgorithm Algorithm { get; set; }
 		public Encoding Encoding { get; set; } = Encoding.Unicode;
-
+		
 		#endregion
 
 		#region Methods
-
-		// public string Encrypt(string data)
-		// {
-		// 	int n = Algorithm.BlockSize;
-		// 	MemoryStream sin = new MemoryStream(Encoding.GetBytes(data));
-		// 	MemoryStream sout = new MemoryStream();
-		//
-		// 	sout.SetLength(0);
-		// 	CryptoStream cryptoStream = new CryptoStream(sout, Algorithm.CreateEncryptor(), CryptoStreamMode.Write);
-		//
-		// 	byte[] buffer = new byte[Encoding.GetByteCount(data)];
-		// 	while (sin.Read(buffer, 0, buffer.Length) != 0)
-		// 	{
-		// 		cryptoStream.Write(buffer);
-		// 	}
-		//
-		// 	return Encoding.GetString(new ReadOnlySpan<byte>(sout.GetBuffer()).Slice(0, Encoding.GetByteCount(data)));
-		// }
-		//
-		// public string Decrypt(string data)
-		// {
-		// 	int n = Algorithm.BlockSize;
-		// 	MemoryStream sin = new MemoryStream(Encoding.GetBytes(data));
-		// 	MemoryStream sout = new MemoryStream(sin.Capacity);
-		//
-		// 	sout.SetLength(0);
-		// 	CryptoStream cryptoStream = new CryptoStream(sout, Algorithm.CreateDecryptor(), CryptoStreamMode.Write);
-		//
-		// 	byte[] buffer = new byte[Encoding.GetByteCount(data)];
-		// 	while (sin.Read(buffer, 0, buffer.Length) != 0)
-		// 	{
-		// 		cryptoStream.Write(buffer);
-		// 	}
-		//
-		// 	return Encoding.GetString(new ReadOnlySpan<byte>(sout.GetBuffer()).Slice(0, Encoding.GetByteCount(data)));
-		// }
 
 		public void Encrypt(string inputPath, string outputPath)
 		{
@@ -118,8 +96,9 @@ namespace CryptoLearn.Models
 		public byte[] StringToBytes(string str)
 		{
 			var t = Encoding.GetBytes(str);
-			var res = new byte[Algorithm.LegalKeySizes[0].MinSize];
-			for (int i = 0; i < Algorithm.LegalKeySizes[0].MinSize; i++)
+			int n = Algorithm.LegalKeySizes[0].MinSize / 8;
+			var res = new byte[n];
+			for (int i = 0; i < n; i++)
 			{
 				res[i] = t[i % t.Length];
 			}
@@ -127,15 +106,11 @@ namespace CryptoLearn.Models
 			return res;
 		}
 
-		public string StreamToString(Stream stream)
+		public void UpdateKeys()
 		{
-			stream.Position = 0;
-			using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
-			{
-				return reader.ReadToEnd();
-			}
+			Key = Encoding.GetString(Algorithm.Key);
+			Iv = Encoding.GetString(Algorithm.IV);
 		}
-
 		#endregion
 
 		#region INotifyPropertyChanged
@@ -149,5 +124,6 @@ namespace CryptoLearn.Models
 		}
 
 		#endregion
+		
 	}
 }

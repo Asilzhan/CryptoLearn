@@ -6,7 +6,6 @@ using CryptoLearn.Annotations;
 using CryptoLearn.Helper;
 using CryptoLearn.Interfaces;
 using CryptoLearn.Models;
-using Microsoft.Xaml.Behaviors.Core;
 
 namespace CryptoLearn.ViewModels
 {
@@ -14,13 +13,9 @@ namespace CryptoLearn.ViewModels
 	{
 		#region Private members
 
-		private DataSourceType _dataSourceType;
 		private string _inputFilePath;
 		private string _outputFilePath;
-		private string _plainText;
-		private string _cipherText;
 		private EncryptionType _encryptionType;
-		private string _key;
 
 		#endregion
 
@@ -33,9 +28,8 @@ namespace CryptoLearn.ViewModels
 			EncryptCommand = new RelayCommand(o =>
 			{
 				Encrypt();
-			}, o => (DataSourceType == DataSourceType.FromFile && !string.IsNullOrEmpty(InputFilePath) &&
-			         !string.IsNullOrEmpty(OutputFilePath))
-			        || DataSourceType == DataSourceType.FromString && !string.IsNullOrEmpty(PlainText));
+			}, o => !string.IsNullOrEmpty(InputFilePath) &&
+			         !string.IsNullOrEmpty(OutputFilePath));
 			SwapTextCommand = new RelayCommand(o =>
 			{
 				InputFilePath = OutputFilePath;
@@ -43,24 +37,16 @@ namespace CryptoLearn.ViewModels
 			});
 			OpenFileCommand = new RelayCommand(o=>OpenFile());
 			SaveFileCommand = new RelayCommand(o=>SaveFile());
-			GenerateKeyCommand = new RelayCommand(o=>SymmetricCipher.Algorithm.GenerateKey());
+			GenerateKeysCommand = new RelayCommand(o=>
+			{
+				GenerateValues();
+			});
 		}
 
 		#endregion
 
 		#region Properties
-
-		public DataSourceType DataSourceType
-		{
-			get => _dataSourceType;
-			set
-			{
-				if (value == _dataSourceType) return;
-				_dataSourceType = value;
-				OnPropertyChanged();
-			}
-		}
-
+		
 		public EncryptionType EncryptionType
 		{
 			get => _encryptionType;
@@ -96,29 +82,7 @@ namespace CryptoLearn.ViewModels
 			}
 		}
 
-		public string PlainText
-		{
-			get => _plainText;
-			set
-			{
-				if (value == _plainText) return;
-				_plainText = value;
-				OnPropertyChanged();
-			}
-		}
-
-		public string CipherText
-		{
-			get => _cipherText;
-			set
-			{
-				if (value == _cipherText) return;
-				_cipherText = value;
-				OnPropertyChanged();
-			}
-		}
-
-		public IOService FileService { get; set; }
+		private IOService FileService { get; }
 		
 		#endregion
 
@@ -131,31 +95,22 @@ namespace CryptoLearn.ViewModels
 
 		public ICommand SwapTextCommand { get; set; }
 
-		public ICommand GenerateKeyCommand { get; set; }
-
-
+		public ICommand GenerateKeysCommand { get; set; }
+		
 		#endregion
 
 		#region Methods
 
 		private void Encrypt()
 		{
-			if (DataSourceType == DataSourceType.FromFile && EncryptionType == EncryptionType.Encrypt)
+			if (EncryptionType == EncryptionType.Encrypt)
 			{
 				SymmetricCipher.Encrypt(_inputFilePath, _outputFilePath);
 			}
-			else if (DataSourceType == DataSourceType.FromFile && EncryptionType == EncryptionType.Decrypt)
+			else if (EncryptionType == EncryptionType.Decrypt)
 			{
 				SymmetricCipher.Decrypt(_inputFilePath, _outputFilePath);
 			}
-			// else if (DataSourceType == DataSourceType.FromString && EncryptionType == EncryptionType.Encrypt)
-			// {
-			// 	CipherText = SymmetricCipher.Encrypt(PlainText);
-			// }
-			// else if (DataSourceType == DataSourceType.FromString && EncryptionType == EncryptionType.Decrypt)
-			// {
-			// 	CipherText = SymmetricCipher.Decrypt(PlainText);
-			// }		
 		}
 		private void OpenFile()
 		{
@@ -164,6 +119,13 @@ namespace CryptoLearn.ViewModels
 		private void SaveFile()
 		{
 			OutputFilePath = FileService.SaveFileDialog(Environment.GetFolderPath(Environment.SpecialFolder.Desktop)) ?? string.Empty;
+		}
+
+		private void GenerateValues()
+		{
+			SymmetricCipher.Algorithm.GenerateKey();
+			SymmetricCipher.Algorithm.GenerateIV();
+			SymmetricCipher.UpdateKeys();
 		}
 		#endregion
 		

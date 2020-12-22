@@ -482,7 +482,7 @@
                         <TabItem Header="Example" Style="{StaticResource secondaryTabStyle}">
                             <Grid Background="#FFE5E5E5">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="2*" />
                                     <RowDefinition Height="3*" />
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0" Background="#FFE5E5E5">
@@ -509,25 +509,36 @@
                                             <GroupBox Grid.Column="1" Header="Параметрi" Margin="6"
                                                       Foreground="Black" VerticalAlignment="Stretch"
                                                       HorizontalAlignment="Stretch">
-                                                <StackPanel Orientation="Vertical">
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <Label Content="Кілт" Margin="10,4,0,0" Height="26"
-                                                               Width="50"
-                                                               VerticalAlignment="Top" HorizontalAlignment="Left" />
-                                                        <TextBox Text="{Binding SymmetricCipher.Key}"
-                                                                 Margin="6" 
-                                                                 HorizontalAlignment="Right"
-                                                                 VerticalAlignment="Top"
-                                                                 Height="24"
-                                                                 Width="520"
-                                                                 />
+                                                <StackPanel>
+                                                    <StackPanel Orientation="Vertical">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Label Content="Кілт" Margin="10,4,0,0" Height="26"
+                                                                   Width="150"
+                                                                   VerticalAlignment="Top" HorizontalAlignment="Left" />
+                                                            <TextBox Text="{Binding SymmetricCipher.Key}"
+                                                                     Margin="6"
+                                                                     HorizontalAlignment="Right"
+                                                                     VerticalAlignment="Top"
+                                                                     Height="24"
+                                                                     Width="400" />
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Label Content="Инициализация векторы" Margin="10,4,0,0" Height="26"
+                                                                   Width="150"
+                                                                   VerticalAlignment="Top" HorizontalAlignment="Left" />
+                                                            <TextBox Text="{Binding SymmetricCipher.Iv}"
+                                                                     Margin="6"
+                                                                     HorizontalAlignment="Right"
+                                                                     VerticalAlignment="Top"
+                                                                     Height="24"
+                                                                     Width="400" />
+                                                        </StackPanel>
+                                                        <Button Command="{Binding GenerateKeysCommand}"
+                                                                Content="Генерациялау"
+                                                                Width="120"
+                                                                HorizontalAlignment="Right"
+                                                                Margin="24,6" />
                                                     </StackPanel>
-                                                    <Button Command="{Binding GenerateKeyCommand}"
-                                                            Content="Генерациялау"
-                                                            Width="120"
-                                                            HorizontalAlignment="Right"
-                                                            Margin="6"
-                                                    />                                                
                                                 </StackPanel>
 
                                             </GroupBox>
@@ -625,7 +636,7 @@
                         <TabItem Header="Example" Style="{StaticResource secondaryTabStyle}">
                             <Grid Background="#FFE5E5E5">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="2*" />
                                     <RowDefinition Height="3*" />
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0" Background="#FFE5E5E5">
@@ -652,26 +663,38 @@
                                             <GroupBox Grid.Column="1" Header="Параметрi" Margin="6"
                                                       Foreground="Black" VerticalAlignment="Stretch"
                                                       HorizontalAlignment="Stretch">
-                                                <StackPanel Orientation="Vertical">
-                                                    <StackPanel Orientation="Horizontal">
-                                                        <Label Content="Кілт" Margin="10,4,0,0" Height="26"
-                                                               Width="50"
-                                                               VerticalAlignment="Top" HorizontalAlignment="Left" />
-                                                        <TextBox Text="{Binding SymmetricCipher.Key}"
-                                                                 Margin="6" 
-                                                                 HorizontalAlignment="Right"
-                                                                 VerticalAlignment="Top"
-                                                                 Height="24"
-                                                                 Width="520"
-                                                        />
+                                                <StackPanel>
+                                                    <StackPanel Orientation="Vertical">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Label Content="Кілт" Margin="10,4,0,0" Height="26"
+                                                                   Width="150"
+                                                                   VerticalAlignment="Top" HorizontalAlignment="Left" />
+                                                            <TextBox Text="{Binding SymmetricCipher.Key}"
+                                                                     Margin="6"
+                                                                     HorizontalAlignment="Right"
+                                                                     VerticalAlignment="Top"
+                                                                     Height="24"
+                                                                     Width="400" />
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Label Content="Инициализация векторы" Margin="10,4,0,0" Height="26"
+                                                                   Width="150"
+                                                                   VerticalAlignment="Top" HorizontalAlignment="Left" />
+                                                            <TextBox Text="{Binding SymmetricCipher.Iv}"
+                                                                     Margin="6"
+                                                                     HorizontalAlignment="Right"
+                                                                     VerticalAlignment="Top"
+                                                                     Height="24"
+                                                                     Width="400" />
+                                                        </StackPanel>
+                                                        <Button Command="{Binding GenerateKeysCommand}"
+                                                                Content="Генерациялау"
+                                                                Width="120"
+                                                                HorizontalAlignment="Right"
+                                                                Margin="24,6" />
                                                     </StackPanel>
-                                                    <Button Command="{Binding GenerateKeyCommand}"
-                                                            Content="Генерациялау"
-                                                            Width="120"
-                                                            HorizontalAlignment="Right"
-                                                            Margin="6"
-                                                            />
                                                 </StackPanel>
+
                                             </GroupBox>
                                         </Grid>
                                     </GroupBox>
