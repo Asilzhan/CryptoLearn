@@ -70,13 +70,39 @@ namespace CryptoLearn.Models
 		
 		#region Methods
 
-		public string Encrypt(string data)
+		public async Task<string> Encrypt(string data)
 		{
-			throw new NotImplementedException();
+			byte[] buff = new byte[Encoding.GetByteCount(data)];
+			MemoryStream sin = new MemoryStream(Encoding.GetBytes(data));
+			MemoryStream sout = new MemoryStream(buff);
+			
+			sout.SetLength(0);
+			CryptoStream cryptoStream = new CryptoStream(sout, Algorithm.CreateEncryptor(), CryptoStreamMode.Write);
+			
+			byte[] buffer = new byte[0x1000];
+			while (await sin.ReadAsync(buffer, 0, buffer.Length) != 0)
+			{
+				await cryptoStream.WriteAsync(buffer);
+			}
+
+			return Encoding.GetString(buff);
 		}
-		public string Decrypt(string data)
+		public async Task<string> Decrypt(string data)
 		{
-			throw new NotImplementedException();
+			byte[] buff = new byte[Encoding.GetByteCount(data)];
+			MemoryStream sin = new MemoryStream(Encoding.GetBytes(data));
+			MemoryStream sout = new MemoryStream(buff);
+			
+			sout.SetLength(0);
+			CryptoStream cryptoStream = new CryptoStream(sout, Algorithm.CreateDecryptor(), CryptoStreamMode.Write);
+			
+			byte[] buffer = new byte[0x1000];
+			while (await sin.ReadAsync(buffer, 0, buffer.Length) != 0)
+			{
+				await cryptoStream.WriteAsync(buffer);
+			}
+
+			return Encoding.GetString(buff);
 		}
 		public async void Encrypt()
 		{
