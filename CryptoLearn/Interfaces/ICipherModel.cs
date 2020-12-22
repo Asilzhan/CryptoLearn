@@ -1,11 +1,15 @@
-﻿namespace CryptoLearn.Interfaces
+﻿using System;
+using System.Windows.Documents;
+
+namespace CryptoLearn.Interfaces
 {
 	public interface ICipherModel
 	{
-		public string PlainText { get; set; }
-		public string Key { get; set; }
-		public string CipherText { get; set; }
-		public string EncryptData();
-		public string DecryptData();
+		public byte[] Key { get; set; }
+		public Span<byte> Encrypt(Span<byte> data);
+		public Span<byte> Decrypt(Span<byte> data);
+
+		public string BytesToString(Span<byte> data);
+		public Span<byte> StringToBytes(string str);
 	}
 }
