@@ -69,6 +69,11 @@ namespace CryptoLearn.Models
 			StringBuilder builder = new StringBuilder(plainText);
 			for (int i = 0; i < plainText.Length; i++)
 			{
+				if (plainText[i] == ' ')
+				{
+					builder[i] = ' ';
+					continue;
+				}
 				int pos1 = Alphabet.IndexOf(char.ToLower(plainText[i]));
 				int pos2 = Alphabet.IndexOf(char.ToLower(key[i]));
 				int pos = (pos1 + pos2) % Alphabet.Length;
@@ -84,6 +89,11 @@ namespace CryptoLearn.Models
 			StringBuilder builder = new StringBuilder(plainText);
 			for (int i = 0; i < plainText.Length; i++)
 			{
+				if (plainText[i] == ' ')
+				{
+					builder[i] = ' ';
+					continue;
+				}
 				int pos1 = Alphabet.IndexOf(char.ToLower(plainText[i]));
 				int localKey = Alphabet.IndexOf(char.ToLower(key[i]));
 				int pos = (pos1 - localKey + Alphabet.Length) % Alphabet.Length;

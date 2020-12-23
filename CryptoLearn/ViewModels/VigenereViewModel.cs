@@ -18,11 +18,11 @@ namespace CryptoLearn.ViewModels
 
         private Alphabet _alphabetPresenter;
         private EncryptionType _encryptionType;
-        private string _plainText;
+        private string _plainText = "";
         private string _cipherText;
         private bool _isValid = true;
         private string _key;
-        private bool _isValidPlainText;
+        private bool _isValidPlainText = true;
 
         #endregion
 
@@ -61,11 +61,8 @@ namespace CryptoLearn.ViewModels
                 if (value == _plainText) return;
                 IsValidPlainText = IsPlainTextValidate(value);
                 _plainText = value;
-                if (IsValidPlainText)
-                {
-                    PlainText = value;
-                    OnPropertyChanged();
-                }
+                PlainText = value;
+                OnPropertyChanged();
             }
         }
 
@@ -88,17 +85,10 @@ namespace CryptoLearn.ViewModels
                 if (value == _key) return;
                 IsValid = IsKeyValidate(value);
                 _key = value;
-                if (IsValid)
-                {
-                    Vigenere.Key = value;
-                    OnPropertyChanged();
-                }
+                Vigenere.Key = value;
+                OnPropertyChanged();
             }
         }
-
-        public IVigenereModel Vigenere { get; set; }
-        public ICommand EncryptCommand { get; set; }
-        public ICommand SwapTextCommand { get; set; }
 
         public bool IsValid
         {
@@ -144,6 +134,14 @@ namespace CryptoLearn.ViewModels
         }
         #endregion
 
+        #region Commands
+
+        public IVigenereModel Vigenere { get; set; }
+        public ICommand EncryptCommand { get; set; }
+        public ICommand SwapTextCommand { get; set; }
+
+        #endregion
+
         #region Constuctor
 
         public VigenereViewModel()
@@ -183,13 +181,14 @@ namespace CryptoLearn.ViewModels
 
         private bool IsPlainTextValidate(string plainText)
         {
-            if (string.IsNullOrEmpty(plainText))
+            if (plainText == null)
                 return false;
             foreach (var t in plainText)
             {
-                if (AlphabetPresenter.Value.IndexOf(t, StringComparison.OrdinalIgnoreCase) == -1)
+                if (AlphabetPresenter.Value.IndexOf(t, StringComparison.OrdinalIgnoreCase) == -1 && t != ' ')
                     return false;
             }
+
             return true;
         }
         
