@@ -1002,6 +1002,85 @@
                     </TabControl>
                 </Grid>
             </TabItem>
+            
+            <TabItem Header="Sec" Foreground="#FFDADADA"
+                     Style="{StaticResource mainTabStyle}"
+                     DataContext="{Binding RsaViewModel}">
+                <Canvas
+                    Width="300"
+                    Height="300"
+                    ClipToBounds="True">
+                    <Canvas
+                        Canvas.Top="79"
+                        Width="140"
+                        Height="30"
+                        ClipToBounds="True">
+                        <Rectangle
+                            Width="140"
+                            Height="30"
+                            RadiusX="4"
+                            RadiusY="4"
+                            StrokeThickness="1"
+                            Stroke="#C8C9CC"
+                            Fill="#FFFFFF" />
+                    </Canvas>
+                    <Rectangle
+                        Canvas.Left="246"
+                        Canvas.Top="4"
+                        Width="50"
+                        Height="50"
+                        RadiusX="25"
+                        RadiusY="25">
+                        <Rectangle.Fill>
+                            <ImageBrush
+                                Stretch="UniformToFill" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Canvas
+                        Canvas.Left="80"
+                        Canvas.Top="115"
+                        Width="60"
+                        Height="19"
+                        ClipToBounds="True">
+                        <Rectangle
+                            Width="60"
+                            Height="19"
+                            Fill="#0078D7" />
+                        <Border
+                            Canvas.Left="9"
+                            Canvas.Top="-0.5"
+                            Width="43"
+                            Height="20">
+                            <TextBlock
+                                TextAlignment="Center"
+                                VerticalAlignment="Top"
+                                LineHeight="20"
+                                TextWrapping="Wrap"
+                                Text="Accept"
+                                FontFamily="Segoe UI"
+                                FontSize="14"
+                                FontStretch="Medium"
+                                Foreground="#FFFFFF" />
+                        </Border>
+                    </Canvas>
+                    <Border
+                        Canvas.Left="3"
+                        Canvas.Top="55"
+                        Width="68"
+                        Height="24">
+                        <TextBlock
+                            TextAlignment="Left"
+                            VerticalAlignment="Center"
+                            LineHeight="24"
+                            TextWrapping="Wrap"
+                            Text="Name"
+                            FontFamily="Segoe UI"
+                            FontSize="18"
+                            FontStretch="Medium"
+                            Foreground="#000000" />
+                    </Border>
+                </Canvas>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

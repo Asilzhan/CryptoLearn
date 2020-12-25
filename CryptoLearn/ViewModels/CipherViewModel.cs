@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using CryptoLearn.Annotations;
 using CryptoLearn.Helper;
@@ -101,15 +102,15 @@ namespace CryptoLearn.ViewModels
 
 		#region Methods
 
-		private void Encrypt()
+		private async void Encrypt()
 		{
 			if (EncryptionType == EncryptionType.Encrypt)
 			{
-				SymmetricCipher.Encrypt(_inputFilePath, _outputFilePath);
+				await Task.Run(() => SymmetricCipher.Encrypt(_inputFilePath, _outputFilePath));
 			}
 			else if (EncryptionType == EncryptionType.Decrypt)
 			{
-				SymmetricCipher.Decrypt(_inputFilePath, _outputFilePath);
+				await Task.Run(() => SymmetricCipher.Decrypt(_inputFilePath, _outputFilePath));
 			}
 		}
 		private void OpenFile()

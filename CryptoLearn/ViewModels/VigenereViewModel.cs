@@ -147,12 +147,7 @@ namespace CryptoLearn.ViewModels
         public VigenereViewModel()
         {
             Vigenere = new Vigenere();
-            EncryptCommand = new RelayCommand(o =>
-            {
-                if (EncryptionType == EncryptionType.Encrypt)
-                    CipherText = Vigenere.Encrypt(PlainText);
-                else CipherText = Vigenere.Decrypt(PlainText);
-            }, o => IsValid && IsValidPlainText);
+            EncryptCommand = new RelayCommand(o => Encrypt(), o => IsValid && IsValidPlainText);
             SwapTextCommand = new RelayCommand(o =>
             {
                 PlainText = CipherText;
@@ -167,6 +162,12 @@ namespace CryptoLearn.ViewModels
 
         #region Methods
 
+        private void Encrypt()
+        {
+            if (EncryptionType == EncryptionType.Encrypt)
+                CipherText = Vigenere.Encrypt(PlainText);
+            else CipherText = Vigenere.Decrypt(PlainText);
+        }
         private bool IsKeyValidate(string key)
         {
             if (string.IsNullOrEmpty(key))

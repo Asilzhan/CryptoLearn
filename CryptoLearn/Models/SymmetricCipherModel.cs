@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -16,6 +17,9 @@ namespace CryptoLearn.Models
 
 		private string _key;
 		private string _iv;
+		private long _totalLengthBytes;
+		private long _read;
+		private long _elapsed;
 
 		#endregion
 
@@ -55,7 +59,40 @@ namespace CryptoLearn.Models
 
 		public SymmetricAlgorithm Algorithm { get; set; }
 		public Encoding Encoding { get; set; } = Encoding.Unicode;
-		
+
+		public long TotalLengthBytes
+		{
+			get => _totalLengthBytes;
+			set
+			{
+				if (value == _totalLengthBytes) return;
+				_totalLengthBytes = value;
+				OnPropertyChanged();
+			}
+		}
+
+		public long Read
+		{
+			get => _read;
+			set
+			{
+				if (value == _read) return;
+				_read = value;
+				OnPropertyChanged();
+			}
+		}
+
+		public long Elapsed
+		{
+			get => _elapsed;
+			set
+			{
+				if (value == _elapsed) return;
+				_elapsed = value;
+				OnPropertyChanged();
+			}
+		}
+
 		#endregion
 
 		#region Methods
@@ -65,14 +102,19 @@ namespace CryptoLearn.Models
 			FileStream fin = new FileStream(inputPath, FileMode.Open, FileAccess.Read);
 			FileStream fout = new FileStream(outputPath, FileMode.OpenOrCreate, FileAccess.Write);
 
+			TotalLengthBytes = fin.Length;
+			
 			fout.SetLength(0);
 			CryptoStream cryptoStream = new CryptoStream(fout, Algorithm.CreateEncryptor(), CryptoStreamMode.Write);
-
 			byte[] buffer = new byte[0x1000];
+			Stopwatch stopwatch = Stopwatch.StartNew();
 			while (fin.Read(buffer, 0, buffer.Length) != 0)
 			{
 				cryptoStream.Write(buffer);
+				Read += buffer.Length;
 			}
+			stopwatch.Stop();
+			Elapsed = stopwatch.ElapsedMilliseconds;
 			fin.Close();
 			fout.Close();
 		}
