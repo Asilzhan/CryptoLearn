@@ -17,7 +17,7 @@ namespace CryptoLearn.Models
 
 		private string _key;
 		private string _iv;
-		private long _totalLengthBytes;
+		private long _totalLengthBytes = 1;
 		private long _read;
 		private long _elapsed;
 
@@ -127,10 +127,15 @@ namespace CryptoLearn.Models
 			CryptoStream cryptoStream = new CryptoStream(fout, Algorithm.CreateDecryptor(), CryptoStreamMode.Write);
 
 			byte[] buffer = new byte[0x1000];
+			Stopwatch stopwatch = Stopwatch.StartNew();
 			while (fin.Read(buffer, 0, buffer.Length) != 0)
 			{
 				cryptoStream.Write(buffer);
+				Read += buffer.Length;
 			}
+			stopwatch.Stop();
+			Elapsed = stopwatch.ElapsedMilliseconds;
+			Read = 0;
 			fin.Close();
 			fout.Close();
 		}

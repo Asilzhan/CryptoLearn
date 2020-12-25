@@ -482,11 +482,12 @@
                         <TabItem Header="Example" Style="{StaticResource secondaryTabStyle}">
                             <Grid Background="#FFE5E5E5">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="2*" />
-                                    <RowDefinition Height="3*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0" Background="#FFE5E5E5">
-                                    <GroupBox Header="Инициализациялау" Margin="10,10,10,0" Foreground="Black">
+                                    <GroupBox Header="Инициализациялау" Margin="10" Foreground="Black">
                                         <Grid Background="#FFE5E5E5" HorizontalAlignment="Stretch"
                                               VerticalAlignment="Stretch">
                                             <Grid.ColumnDefinitions>
@@ -523,7 +524,8 @@
                                                                      Width="400" />
                                                         </StackPanel>
                                                         <StackPanel Orientation="Horizontal">
-                                                            <Label Content="Инициализация векторы" Margin="10,4,0,0" Height="26"
+                                                            <Label Content="Инициализация векторы" Margin="10,4,0,0"
+                                                                   Height="26"
                                                                    Width="150"
                                                                    VerticalAlignment="Top" HorizontalAlignment="Left" />
                                                             <TextBox Text="{Binding SymmetricCipher.Iv}"
@@ -603,10 +605,27 @@
                                                             Command="{Binding EncryptCommand}" />
                                                 </StackPanel>
                                             </StackPanel>
+
                                         </Grid>
                                     </GroupBox>
                                 </Grid>
-
+                                <Grid Grid.Row="2" Background="#FFE5E5E5">
+                                    <GroupBox Header="Процесс" Margin="10" Foreground="Black">
+                                            <StackPanel Orientation="Vertical">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <ProgressBar Minimum="0"
+                                                                 Maximum="{Binding Path=SymmetricCipher.TotalLengthBytes}"
+                                                                 Value="{Binding Path=SymmetricCipher.Read}" Height="25"
+                                                                 Width="500" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" />
+                                                    <TextBlock Text="{Binding StringFormat={}{0} байт шифрланды,  Path=SymmetricCipher.Read}" 
+                                                               Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                                </StackPanel>
+                                                
+                                                <TextBlock Text="{Binding StringFormat=Барлығы {0} мс уақыт өтті.,  Path=SymmetricCipher.Elapsed}" 
+                                                           Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                            </StackPanel>
+                                    </GroupBox>
+                                </Grid>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Description" Style="{StaticResource secondaryTabStyle}">
@@ -635,11 +654,12 @@
                         <TabItem Header="Example" Style="{StaticResource secondaryTabStyle}">
                             <Grid Background="#FFE5E5E5">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="2*" />
-                                    <RowDefinition Height="3*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0" Background="#FFE5E5E5">
-                                    <GroupBox Header="Инициализациялау" Margin="10,10,10,0" Foreground="Black">
+                                    <GroupBox Header="Инициализациялау" Margin="10" Foreground="Black">
                                         <Grid Background="#FFE5E5E5" HorizontalAlignment="Stretch"
                                               VerticalAlignment="Stretch">
                                             <Grid.ColumnDefinitions>
@@ -676,7 +696,8 @@
                                                                      Width="400" />
                                                         </StackPanel>
                                                         <StackPanel Orientation="Horizontal">
-                                                            <Label Content="Инициализация векторы" Margin="10,4,0,0" Height="26"
+                                                            <Label Content="Инициализация векторы" Margin="10,4,0,0"
+                                                                   Height="26"
                                                                    Width="150"
                                                                    VerticalAlignment="Top" HorizontalAlignment="Left" />
                                                             <TextBox Text="{Binding SymmetricCipher.Iv}"
@@ -693,7 +714,6 @@
                                                                 Margin="24,6" />
                                                     </StackPanel>
                                                 </StackPanel>
-
                                             </GroupBox>
                                         </Grid>
                                     </GroupBox>
@@ -757,10 +777,27 @@
                                                             Command="{Binding EncryptCommand}" />
                                                 </StackPanel>
                                             </StackPanel>
+
                                         </Grid>
                                     </GroupBox>
                                 </Grid>
-
+                                <Grid Grid.Row="2" Background="#FFE5E5E5">
+                                    <GroupBox Header="Процесс" Margin="10" Foreground="Black">
+                                            <StackPanel Orientation="Vertical">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <ProgressBar Minimum="0"
+                                                                 Maximum="{Binding Path=SymmetricCipher.TotalLengthBytes}"
+                                                                 Value="{Binding Path=SymmetricCipher.Read}" Height="25"
+                                                                 Width="500" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10" />
+                                                    <TextBlock Text="{Binding StringFormat={}{0} байт шифрланды,  Path=SymmetricCipher.Read}" 
+                                                               Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                                </StackPanel>
+                                                
+                                                <TextBlock Text="{Binding StringFormat=Барлығы {0} мс уақыт өтті.,  Path=SymmetricCipher.Elapsed}" 
+                                                           Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                            </StackPanel>
+                                    </GroupBox>
+                                </Grid>
                             </Grid>
                         </TabItem>
                         <TabItem Header="Description" Style="{StaticResource secondaryTabStyle}">
@@ -1001,85 +1038,6 @@
                         </TabItem>
                     </TabControl>
                 </Grid>
-            </TabItem>
-            
-            <TabItem Header="Sec" Foreground="#FFDADADA"
-                     Style="{StaticResource mainTabStyle}"
-                     DataContext="{Binding RsaViewModel}">
-                <Canvas
-                    Width="300"
-                    Height="300"
-                    ClipToBounds="True">
-                    <Canvas
-                        Canvas.Top="79"
-                        Width="140"
-                        Height="30"
-                        ClipToBounds="True">
-                        <Rectangle
-                            Width="140"
-                            Height="30"
-                            RadiusX="4"
-                            RadiusY="4"
-                            StrokeThickness="1"
-                            Stroke="#C8C9CC"
-                            Fill="#FFFFFF" />
-                    </Canvas>
-                    <Rectangle
-                        Canvas.Left="246"
-                        Canvas.Top="4"
-                        Width="50"
-                        Height="50"
-                        RadiusX="25"
-                        RadiusY="25">
-                        <Rectangle.Fill>
-                            <ImageBrush
-                                Stretch="UniformToFill" />
-                        </Rectangle.Fill>
-                    </Rectangle>
-                    <Canvas
-                        Canvas.Left="80"
-                        Canvas.Top="115"
-                        Width="60"
-                        Height="19"
-                        ClipToBounds="True">
-                        <Rectangle
-                            Width="60"
-                            Height="19"
-                            Fill="#0078D7" />
-                        <Border
-                            Canvas.Left="9"
-                            Canvas.Top="-0.5"
-                            Width="43"
-                            Height="20">
-                            <TextBlock
-                                TextAlignment="Center"
-                                VerticalAlignment="Top"
-                                LineHeight="20"
-                                TextWrapping="Wrap"
-                                Text="Accept"
-                                FontFamily="Segoe UI"
-                                FontSize="14"
-                                FontStretch="Medium"
-                                Foreground="#FFFFFF" />
-                        </Border>
-                    </Canvas>
-                    <Border
-                        Canvas.Left="3"
-                        Canvas.Top="55"
-                        Width="68"
-                        Height="24">
-                        <TextBlock
-                            TextAlignment="Left"
-                            VerticalAlignment="Center"
-                            LineHeight="24"
-                            TextWrapping="Wrap"
-                            Text="Name"
-                            FontFamily="Segoe UI"
-                            FontSize="18"
-                            FontStretch="Medium"
-                            Foreground="#000000" />
-                    </Border>
-                </Canvas>
             </TabItem>
         </TabControl>
     </Grid>
