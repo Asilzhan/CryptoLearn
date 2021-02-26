@@ -15,7 +15,7 @@ namespace CryptoLearn.ViewModels
         public VigenereViewModel VigenereViewModel { get; set; }
         public CipherViewModel DesViewModel { get; set; }
         public CipherViewModel AesViewModel { get; set; }
-
+        public Rc5ViewModel Rc5ViewModel { get; set; }
         public RsaViewModel RsaViewModel { get; set; }
         
         public MainWindowViewModel()
@@ -25,7 +25,7 @@ namespace CryptoLearn.ViewModels
             RsaViewModel = new RsaViewModel();
             DesViewModel = new CipherViewModel(new SymmetricCipherModel(){Algorithm = new DESCryptoServiceProvider()}, new FileDialog());
             AesViewModel = new CipherViewModel(new SymmetricCipherModel(){Algorithm = new AesCryptoServiceProvider()}, new FileDialog());
-
+            Rc5ViewModel = new Rc5ViewModel();
         }
 
         #region INotifyPropertyChanged

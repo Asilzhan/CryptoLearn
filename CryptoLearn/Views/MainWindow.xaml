@@ -472,7 +472,177 @@
                     </TabControl>
                 </Grid>
             </TabItem>
+            <!-- RC5 -->
+            <TabItem Header="RC5" Foreground="#FFDADADA"
+                     Style="{StaticResource mainTabStyle}"
+                     DataContext="{Binding Rc5ViewModel}">
+                <Grid>
+                    <TabControl TabStripPlacement="Bottom" Background="#FFE5E5E5">
+                        <TabItem Header="Example" Style="{StaticResource secondaryTabStyle}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="3*" />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Background="#FFE5E5E5">
+                                    <GroupBox Header="Инициализациялау" Margin="10,10,10,0" Foreground="Black">
+                                        <Grid Background="#FFE5E5E5" HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Stretch" Margin="6">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="120" />
+                                                    <ColumnDefinition Width="80" />
+                                                    <ColumnDefinition Width="120" />
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Orientation="Vertical">
 
+                                                    <RadioButton Content="Шифрлау"
+                                                                 GroupName="EncryptType"
+                                                                 IsChecked="{Binding Path=EncryptionType, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=Encrypt}"
+                                                                 Margin="10,10,0,5" />
+                                                    <RadioButton Content="Дешифрлау"
+                                                                 GroupName="EncryptType"
+                                                                 IsChecked="{Binding Path=EncryptionType, Converter={StaticResource EnumBooleanConverter}, ConverterParameter=Decrypt}"
+                                                                 Margin="10,10,0,5" />
+                                                </StackPanel>
+
+                                                <Label Grid.Column="1" Margin="10,5,0,0" Content="Раунд саны"
+                                                       Height="26"
+                                                       VerticalAlignment="Top" HorizontalAlignment="Left" />
+                                                <ComboBox Grid.Column="2" Margin="10,5,0,0" Width="100" Height="24"
+                                                          VerticalAlignment="Top" HorizontalAlignment="Left"
+                                                          SelectedItem="{Binding R}"
+                                                          SelectedIndex="0">
+                                                    <System:Int32>16</System:Int32>
+                                                    <System:Int32>32</System:Int32>
+                                                    <System:Int32>64</System:Int32>
+                                                    <System:Int32>128</System:Int32>
+                                                </ComboBox>
+
+                                                <Label Grid.Column="1" Margin="10,36,0,0" Content="Кілт"
+                                                       Height="26" Width="120"
+                                                       VerticalAlignment="Top" HorizontalAlignment="Left" />
+                                                <TextBox Grid.Column="2"
+                                                         Margin="10,36,0,0"
+                                                         Height="26" Width="100" VerticalAlignment="Top"
+                                                         HorizontalAlignment="Left"
+                                                         Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                                                         Style="{StaticResource StringKeyTextBox}"
+                                                         BorderBrush="{Binding BorderBrush}"
+                                                         Text="{Binding Key, UpdateSourceTrigger=PropertyChanged}">
+                                                </TextBox>
+                                                <Button Grid.Column="2" Margin="10,72,0,0" Command="{Binding UpdateCommand}">Жаңарту</Button>
+                                            </Grid>
+                                        </Grid>
+                                    </GroupBox>
+                                </Grid>
+                                <Grid Grid.Row="1" Background="#FFE5E5E5">
+                                    <GroupBox Header="Шифрлау" Margin="10" Foreground="Black">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="4*" />
+                                                <RowDefinition Height="1*" />
+                                                <RowDefinition Height="4*" />
+                                                <RowDefinition Height="1*" />
+                                            </Grid.RowDefinitions>
+
+                                            <TextBox Grid.Row="0" Grid.Column="0"
+                                                     Margin="6" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Stretch"
+                                                     Style="{StaticResource StringKeyTextBox}"
+                                                     Validation.ErrorTemplate="{StaticResource ValidationTemplate}"
+                                                     BorderBrush="{Binding BorderBrushPlainText}"
+                                                     Text="{Binding PlainText, UpdateSourceTrigger=PropertyChanged}">
+
+                                            </TextBox>
+
+                                            <Button Grid.Row="1" Margin="2,6"
+                                                    HorizontalAlignment="Stretch"
+                                                    Height="24"
+                                                    Width="120"
+                                                    Command="{Binding SwapTextCommand}">
+                                                <Image Source="/Views/UpArrow.png" />
+                                            </Button>
+
+                                            <TextBox Grid.Row="2" Text="{Binding CipherText}"
+                                                     Margin="6" HorizontalAlignment="Stretch"
+                                                     VerticalAlignment="Stretch" IsReadOnly="True"
+                                                     Style="{StaticResource placeHolder}" Tag="Output">
+                                            </TextBox>
+
+                                            <Button Grid.Row="3" Margin="2,6"
+                                                    HorizontalAlignment="Stretch"
+                                                    Content="{Binding EncryptionType}"
+                                                    Height="24"
+                                                    Width="120"
+                                                    Command="{Binding EncryptCommand}" />
+                                        </Grid>
+                                    </GroupBox>
+                                </Grid>
+                            </Grid>
+                        </TabItem>
+
+                        <TabItem Header="Description" Style="{StaticResource secondaryTabStyle}">
+                            <Grid>
+                                <FlowDocumentScrollViewer>
+                                    <FlowDocument>
+                                        <Paragraph>
+                                            <Span Background="Wheat">
+                                                <Italic>Виженер шифры</Italic>
+                                            </Span>
+                                        </Paragraph>
+                                        <Paragraph FontSize="14">Виженер шифры — мәтінді сөздер арқылы берілген кілт көмегімен шифрлау әдісі. Бұл әдіс көпалфавиттік алмасу тәсілінің ең қарапайым түрі болып табылады. Виженер шифры бірнеше рет жаңартылған. Бірінші рет бұл криптография жүйесін 1553 жылы Джовани Баттиста Беллазо (итал. Giovan Battista Bellaso) La cifra del. Sig. Giovan Battista Bellasо кітабына енгізсе де, XIX ғасырда бұл әдіс француз дипломаты Блез Виженердің атына жазылған. Криптоанализдің кейбір түрлеріне ақиық болса да,бұл әдіс түсінуге әрі іске асыруға өте жеңіл.</Paragraph>
+                                        <Paragraph>
+                                            <Span Background="Wheat">
+                                                <Italic>Сипаттамасы</Italic>
+                                            </Span>
+                                        </Paragraph>
+                                        <Paragraph FontSize="14">Шифрлау және дешифрлауға арналған Виженер шаршысы, Виженер кестесі (tabula recta). Цезарь шифрында алфавиттің әрбір әрібі бір позициялық орынға жылжиды. Мысалға, Цезарь шифрында ауысым 3-ке тең болса A=D, B=E және т.б. Виженер шифры әртүрлі ауысымды Цезарь шифрынан тұрады. Шифрлау үшін Виженер шаршысын (кестесін) қолдануға болады. Латын алфавитіне сүйене отырып жасалған Виженер кестесі 26 таңбадан тұрады, сонымен қатар әрбір жол бірнеше позицияға жылжыған. Яғни бізде 26 әртүрлі Цезарь шифры пайда болады. Кілт сөздің таңбасына орай әрбір шифрлау кезеңіне әртүрлі алфавит қолданылады. Мысалға, ашық мәтін келесідей деп алайық:</Paragraph>
+                                        <Paragraph Foreground="Brown">ATTACKATDAWN</Paragraph>
+                                        <Paragraph FontSize="14">Хат жіберіп жатқан адам кілт сөздің (LEMON) ұзындығы мәтін ұзындығына тең болғанша циклді түрде қайталап жазады.</Paragraph>
+                                        <Paragraph Foreground="Brown">LEMONLEMONLE </Paragraph>
+                                        <Paragraph FontSize="14">Ашық мәтіннің бірінші таңбасы A-L кілтіне сәйкес келеді. Жабық мәтіннің бірінші таңбасы L, Виженер кестесіндегі L жолы мен A қатарының қиылысуында жатыр. Тура осындай жүйеде біз екінші әрібі, Е жолы мен Т қатарының қиылысуында жатыр. Ашық мәтіннің келесі бөлігі осылай шифрланады:</Paragraph>
+                                        <Paragraph Foreground="Brown">Ашық мәтін: ATTACKATDAWN </Paragraph>
+                                        <Paragraph Foreground="Brown">Кілт: LEMONLEMONLE</Paragraph>
+                                        <Paragraph Foreground="Brown">Шифрланған мәтін: LXFOPVEFRNHR </Paragraph>
+                                        <Paragraph FontSize="14"> Дешифрлау процесі келесідей жүреді: Кілт таңбаларына келетін жолды Виженер кестесінен табамыз. Жол бойынан жабық мәтінге тән бірінші таңбаны іздейміз. Бірінші таңба тұрған қатар, ашық мәтіннің бірінші әрібіне сәйкес келеді. Келесі әріптерді дешифрлау дәл осындай әдіспен жүреді.</Paragraph>
+                                        <Paragraph FontSize="14">
+                                            Егерде <Italic>n</Italic> – алфавиттегі әріптер саны;
+                                            <Italic>mj</Italic>-ашық мәтін әріптері;<Italic>kj</Italic> -кілт әріптері болса, Виженер әдісін келесідей формуламен беруге болса:
+                                        </Paragraph>
+                                        <Paragraph FontSize="14" TextAlignment="Center">
+                                            <Italic> cj=mj+kj (mod n)</Italic>
+                                        </Paragraph>
+                                        <Paragraph FontSize="14">Дешифрлау:</Paragraph>
+                                        <Paragraph FontSize="14" TextAlignment="Center">
+                                            <Italic>mj=cj-kj (mod n)</Italic>
+                                        </Paragraph>
+                                        <Paragraph FontSize="14">Компьютерде бұндай операция ASCII кодтарын қосу операциясына сәйкес келеді. Дегенмен де, егер Виженер кестесі циклдік араласудан ғана тұрмаса, оның беріктігі артатындығына нық сенімдімін. Әріп қатар мен жолда бір рет қана кездесетіндей кесте жасау өте қиын. Оны тек электрондық компьютерлік құрылғыларда ғана байқап көрген жоқ. Күнделікті өмірде қолдануда Виженер кестесі ешқандай қиындық көрсетпейді. Ол тек шифрлау мен дешифрлауды жеңілдетеді.</Paragraph>
+                                        <BlockUIContainer>
+                                            <ListView
+                                                ItemsSource="{Binding Vigenere.ShiftedAlphabet}"
+                                                Focusable="False"
+                                                HorizontalAlignment="Center">
+                                                <ListView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Margin="0"
+                                                                   Height="15"
+                                                                   HorizontalAlignment="Center"
+                                                                   Text="{Binding Converter={StaticResource SpacedCapitalConverter}}"
+                                                                   TextAlignment="Center" FontFamily="Consolas">
+                                                        </TextBlock>
+                                                    </DataTemplate>
+                                                </ListView.ItemTemplate>
+                                            </ListView>
+                                        </BlockUIContainer>
+                                    </FlowDocument>
+                                </FlowDocumentScrollViewer>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
             <!-- DES -->
             <TabItem Header="DES" Foreground="#FFDADADA"
                      DataContext="{Binding DesViewModel}"
