@@ -1,0 +1,68 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "CryptoLearn/1.0.0": {
+        "dependencies": {
+          "Microsoft.Xaml.Behaviors.Wpf": "1.1.19",
+          "PrimeHelper": "1.0.0",
+          "TinyCsvParser": "2.5.2"
+        },
+        "runtime": {
+          "CryptoLearn.dll": {}
+        }
+      },
+      "Microsoft.Xaml.Behaviors.Wpf/1.1.19": {
+        "runtime": {
+          "lib/netcoreapp3.0/Microsoft.Xaml.Behaviors.dll": {
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.19.35512"
+          }
+        }
+      },
+      "TinyCsvParser/2.5.2": {
+        "runtime": {
+          "lib/netstandard2.1/TinyCsvParser.dll": {
+            "assemblyVersion": "2.5.2.0",
+            "fileVersion": "2.5.2.0"
+          }
+        }
+      },
+      "PrimeHelper/1.0.0": {
+        "runtime": {
+          "PrimeHelper.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CryptoLearn/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Xaml.Behaviors.Wpf/1.1.19": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5sPWkbqImc2t1aQwIfJcKsUo7tOg1Tr8+6xVzZJB56Nzt4u9NlpcLofgdX/aRYpPKdWDA3U23Akw1KQzU5e82g==",
+      "path": "microsoft.xaml.behaviors.wpf/1.1.19",
+      "hashPath": "microsoft.xaml.behaviors.wpf.1.1.19.nupkg.sha512"
+    },
+    "TinyCsvParser/2.5.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mDjkai+t65Fy22atLSKqFEkvqNAhwgNh8hGoQgEPJHI/SeZs2Xf2DNb6w1ZACcfPY+3LnnZT1pHm4ees3k+KqA==",
+      "path": "tinycsvparser/2.5.2",
+      "hashPath": "tinycsvparser.2.5.2.nupkg.sha512"
+    },
+    "PrimeHelper/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
